@@ -1,12 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialValue = [];
-
 export const ListItemSlice = createSlice({
   // name tidak berpengaruh untuk memanggil state
   name: "List",
+  // State
+  // listItem = {
+  //   id, nama, harga, stok, quantity
+  // }
+  // listPembayaran = {
+  //   total, bayar, kembali
+  // }
   initialState: {
-    listItem: initialValue,
+    listItem: [],
+    listPayment: [],
   },
   reducers: {
     addListItem: (state, action) => {
@@ -73,6 +79,7 @@ export const ListItemSlice = createSlice({
     },
     deleteAllListItem: (state) => {
       state.listItem = [];
+      state.listPayment = [];
     },
     increment: (state, action) => {
       if (
@@ -94,6 +101,16 @@ export const ListItemSlice = createSlice({
           state.listItem[action.payload].quantity - 1;
       }
     },
+    newPayment: (state, action) => {
+      state.listPayment = [action.payload];
+      // state.listPayment =
+      //   {
+      //     total: 1,
+      //     bayar: 1,
+      //     kembali: 1,
+      //     kode_nota: "uuidbaru",
+      //   },
+    },
   },
 });
 
@@ -103,5 +120,6 @@ export const {
   deleteAllListItem,
   increment,
   decrement,
+  newPayment,
 } = ListItemSlice.actions;
 export default ListItemSlice.reducer;

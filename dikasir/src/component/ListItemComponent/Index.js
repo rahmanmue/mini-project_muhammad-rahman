@@ -7,9 +7,10 @@ import {
 } from "../../store/ListItemSlice";
 import { useDispatch, useSelector } from "react-redux";
 // import { Row, Col } from "react-bootstrap";
+import { rupiah } from "../../util";
 
 const Index = ({ item, index }) => {
-  const { nama, harga, id, stok } = item;
+  const { nama, harga, id } = item;
   const dispatch = useDispatch();
   const listItem = useSelector((state) => state.List.listItem);
   const quantity = listItem[index].quantity;
@@ -29,7 +30,7 @@ const Index = ({ item, index }) => {
           <strong className="title-item">{nama}</strong>
         </div>
         <div>
-          <span>Rp.{harga}</span>
+          <span>{rupiah(harga)}</span>
         </div>
       </div>
       <div className="d-flex align-items-center ms-auto me-5">

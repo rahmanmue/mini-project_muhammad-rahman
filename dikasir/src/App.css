@@ -9,5 +9,10 @@ body{
     text-transform: capitalize;
 }
 
-
+.form-control:focus{
+    outline: none;
+    /* border: none; */
+    /* background-color: lightblue; */
+    /* font-weight: 700; */
+}
 

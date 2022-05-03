@@ -7,9 +7,21 @@ import "./custom.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 
+// import apollo
+import { ApolloProvider } from "@apollo/client";
+import client from "./gql/apollo-client";
+
+// import react-redux & store
+import { Provider } from "react-redux";
+import { store } from "./store/store";
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );

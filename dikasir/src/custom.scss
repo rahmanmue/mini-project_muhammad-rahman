@@ -1,17 +1,14 @@
 
 $custom-theme-colors : (
-    'light-blue':#56CCF2,
-    'tosca':#AEE0D4,
-    'midnight-blue':#3B4053,
-    'light-red':#EE6565,
-    'light-green': #6FCF97
+    'primary-2': #2D9CDB,
+    'primary-3':#56CCF2,
+    'primary-4':#AEE0D4,
+    'danger-2': #F25858,
+    'danger-3':#EE6565,
+    'warning-2': #FBCE46,
+    'dark-2':#3B4053,
+    'success-2': #6FCF97
     );
-    
-$theme-colors : (
-    'primary': #2D9CDB,
-    'danger': #F25858,
-    'warning': #FBCE46
-    );
-        
-$theme-colors : map-merge($custom-theme-colors, $theme-colors);
+     
+$theme-colors : $custom-theme-colors;
 @import '~bootstrap/scss/bootstrap.scss';

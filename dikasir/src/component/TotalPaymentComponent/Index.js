@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { newPayment } from "../../store/ListItemSlice";
@@ -7,40 +7,41 @@ import { rupiah } from "../../util";
 const Index = () => {
   const dispatch = useDispatch();
   const listItem = useSelector((state) => state.List.listItem);
-  const listPembayaran = useSelector((state) => state.List.listPayment);
-
   const [bayar, setBayar] = useState(0);
   let totalBayar = 0;
-  let kembali = 0;
-
-  const handleChangeBayar = (e) => {
-    setBayar(Number(e.target.value));
-  };
-
   totalBayar = listItem.reduce((total, aliasListItem) => {
     return total + aliasListItem.harga * aliasListItem.quantity;
   }, 0);
-
+  let kembali = 0;
   kembali = bayar - totalBayar;
 
-  const onSubmit = (e) => {
-    e.preventDefault();
+  const addNewDataPayment = async () => {
+    let kodeNota = "";
+    await (listItem.length > 0 ? (kodeNota = listItem[0].kodeNota) : "");
+    const newData = {
+      total: totalBayar,
+      bayar: bayar,
+      kembali: kembali,
+      kodeNota: kodeNota,
+    };
+    dispatch(newPayment(newData));
+  };
 
+  const lp = useSelector((state) => state.List.listPayment);
+
+  const handleClick = async (e) => {
     if (kembali < 0) {
       return alert("Pembayaran Kurang !!!");
     } else {
-      const newData = {
-        total: totalBayar,
-        bayar: bayar,
-        kembali: kembali,
-        kode_nota: "uuid",
-      };
-      dispatch(newPayment(newData));
+      await addNewDataPayment();
+      console.log("ListItem : ", listItem);
+      console.log("transaksi : ", lp);
     }
-    console.log("ambil dari submit", listPembayaran);
   };
-  // console.log("ambil dari luar", listPembayaran);
-  // console.log(listPembayaran);
+
+  // useEffect(() => {
+  //   transaksi = lp;
+  // }, [lp]);
 
   return (
     <>
@@ -51,7 +52,7 @@ const Index = () => {
             <input
               type="number"
               max={totalBayar}
-              onChange={handleChangeBayar}
+              onChange={(e) => setBayar(Number(e.target.value))}
               className="form-control "
               // dir="rtl"
               style={{ width: "28%", height: "30px" }}
@@ -69,11 +70,7 @@ const Index = () => {
             </strong>
           </div>
 
-          <Button
-            className="bg-primary-2 my-2 border-0"
-            onClick={onSubmit}
-            // onClick={() => dispatch(newPayment(newData))}
-          >
+          <Button className="bg-primary-2 my-2 border-0" onClick={handleClick}>
             KONFIRMASI PEMBAYARAN
           </Button>
         </Card>

@@ -6,7 +6,6 @@ import {
   decrement,
 } from "../../store/ListItemSlice";
 import { useDispatch, useSelector } from "react-redux";
-// import { Row, Col } from "react-bootstrap";
 import { rupiah } from "../../util";
 
 const Index = ({ item, index }) => {
@@ -14,11 +13,6 @@ const Index = ({ item, index }) => {
   const dispatch = useDispatch();
   const listItem = useSelector((state) => state.List.listItem);
   const quantity = listItem[index].quantity;
-  console.log(listItem.quantity);
-
-  const handleChange = (e) => {
-    console.log(e.target.value);
-  };
 
   return (
     <div

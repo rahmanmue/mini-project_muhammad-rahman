@@ -1,27 +1,40 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Col, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addListItem } from "../../store/ListItemSlice";
 import { addIcon } from "../../assets";
 import { rupiah } from "../../util";
+import { useSelector } from "react-redux";
 
-const Index = ({ item }) => {
-  const { nama, stok, harga, gambar, id } = item;
-  const newData = (value) => {
-    return { id: id, nama: nama, harga: harga, stok: stok, quantity: value };
-  };
-  const handleChange = (e) => {
-    console.log(e.target.value);
-    if (e.target.value > stok || e.target.value === "") {
-      setData(newData(1));
+const Index = ({ data }) => {
+  const { nama, stok, harga, gambar, id } = data;
+  const dispatch = useDispatch();
+  const listPayment = useSelector((state) => state.List.listPayment);
+  const uuid = useSelector((state) => state.List.uuid);
+  const [qty, setQty] = useState(1);
+  const [newData, setnewData] = useState({});
+
+  const addData = (qty, kodeNota) => {
+    if (qty > stok || qty === "") {
+      setQty(1);
     } else {
-      setData(newData(Number(e.target.value)));
+      setnewData({
+        id: id,
+        nama: nama,
+        harga: harga,
+        stok: stok,
+        quantity: qty,
+        kodeNota: kodeNota,
+      });
     }
   };
 
-  const [data, setData] = useState(newData(1));
+  useEffect(() => {
+    addData(qty, uuid);
+  }, [listPayment]);
 
-  const dispatch = useDispatch();
+  // console.log("list Bayar : ", listPayment);
+
   return (
     <Col md={4} className="mt-5 px-3">
       <Card className="rounded-5 ">
@@ -36,14 +49,15 @@ const Index = ({ item }) => {
               className="form-control"
               max={stok}
               min="1"
-              onChange={handleChange}
+              onChange={(e) => setQty(Number(e.target.value))}
               placeholder={`Max : ${stok}`}
               style={{ width: "70%" }}
             />
             <button
               type="button"
               className="btn bg-warning-2 "
-              onClick={() => dispatch(addListItem(data))}
+              onClick={() => dispatch(addListItem(newData))}
+              // onClick={addData}
             >
               <img src={addIcon} alt="tambah" width={15} />
             </button>

@@ -10,7 +10,6 @@ import { useSelector } from "react-redux";
 
 const Index = () => {
   const listItem = useSelector((state) => state.List.listItem);
-  console.log(listItem);
 
   return (
     <>

@@ -5,12 +5,13 @@ export const ListItemSlice = createSlice({
   name: "List",
   // State
   // listItem = {
-  //   id, nama, harga, stok, quantity
+  //   id, nama, harga, stok, quantity, kodeNota
   // }
   // listPembayaran = {
-  //   total, bayar, kembali
+  //   total, bayar, kembali, kodeNota
   // }
   initialState: {
+    uuid: "",
     listItem: [],
     listPayment: [],
   },
@@ -103,13 +104,9 @@ export const ListItemSlice = createSlice({
     },
     newPayment: (state, action) => {
       state.listPayment = [action.payload];
-      // state.listPayment =
-      //   {
-      //     total: 1,
-      //     bayar: 1,
-      //     kembali: 1,
-      //     kode_nota: "uuidbaru",
-      //   },
+    },
+    addUid: (state, action) => {
+      state.uuid = action.payload;
     },
   },
 });
@@ -121,5 +118,6 @@ export const {
   increment,
   decrement,
   newPayment,
+  addUid,
 } = ListItemSlice.actions;
 export default ListItemSlice.reducer;

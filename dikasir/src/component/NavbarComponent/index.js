@@ -11,7 +11,7 @@ const Index = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
-          <Nav className="ms-auto">
+          <Nav className="mx-auto">
             <Nav.Link href="#features" className="pe-5">
               Dashboard
             </Nav.Link>
@@ -23,15 +23,15 @@ const Index = () => {
             </Nav.Link>
           </Nav>
           <div className="ms-auto">
-            <Button className="bg-transparent border border-white rounded me-2 px-4">
-              Menu Kasir
-            </Button>
-            <Button className="bg-primary-3 border-0 rounded">
+            {/* <Button className="bg-transparent border border-white rounded me-2 px-4">
+              Dashboard
+            </Button> */}
+            {/* <Button className="bg-primary-3 border-0 rounded">
               <div className="d-flex justify-content-center">
                 <img src={userIcon} alt="user" className="me-2" />
                 KASIR001
               </div>
-            </Button>
+            </Button> */}
           </div>
         </Navbar.Collapse>
       </Container>

@@ -5,17 +5,6 @@ import { CardComponent, SearchComponent } from "../index";
 // import { useDispatch } from "react-redux";
 
 const Index = ({ data }) => {
-  // const [listItem, setListItem] = useState([]);
-
-  // const addListItem = (value) => {
-  //   const addListItem = [...listItem, value];
-  //   setListItem(addListItem);
-  // };
-
-  // console.log(listItem);
-
-  // const dispatch = useDispatch();
-
   return (
     <>
       <Col md={7} className="mt-5">
@@ -24,8 +13,8 @@ const Index = ({ data }) => {
         </Row>
 
         <Row>
-          {data.map((item, index) => (
-            <CardComponent key={item.id} item={item} />
+          {data.map((item) => (
+            <CardComponent key={item.id} data={item} />
           ))}
         </Row>
       </Col>

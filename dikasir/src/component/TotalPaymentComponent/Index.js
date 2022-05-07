@@ -1,8 +1,39 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { newPayment } from "../../store/ListItemSlice";
+import { deleteAllListItem, newPayment } from "../../store/ListItemSlice";
 import { toRupiah } from "../../utils/toRupiah";
+import { getDate } from "../../utils/getDate";
+import { gql, useMutation } from "@apollo/client";
+
+const addData = gql`
+  mutation MyMutation($objects: [test_Nota_insert_input!] = {}) {
+    insert_test_Nota(objects: $objects) {
+      affected_rows
+      returning {
+        id
+        id_product
+        kodeNota
+        nama
+        quantity
+        harga
+      }
+    }
+  }
+`;
+
+const insertTransaksi = gql`
+  mutation MyMutation($object: test_Transaksi_insert_input = {}) {
+    insert_test_Transaksi_one(object: $object) {
+      id
+      total
+      bayar
+      kembali
+      kodeNota
+      tanggal
+    }
+  }
+`;
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -16,32 +47,50 @@ const Index = () => {
   kembali = bayar - totalBayar;
 
   const addNewDataPayment = async () => {
-    let kodeNota = "";
+    let kodeNota;
     await (listItem.length > 0 ? (kodeNota = listItem[0].kodeNota) : "");
     const newData = {
       total: totalBayar,
       bayar: bayar,
       kembali: kembali,
       kodeNota: kodeNota,
+      tanggal: getDate(),
     };
     dispatch(newPayment(newData));
   };
 
   const lp = useSelector((state) => state.List.listPayment);
-
-  const handleClick = async (e) => {
+  const [btnDisable, setBtnDisable] = useState(false);
+  const handleClickConfirmProduct = async () => {
     if (kembali < 0) {
       return alert("Pembayaran Kurang !!!");
+    } else if (totalBayar === 0) {
+      return alert("Silahkan Pilih Barang Terlebih Dahulu");
     } else {
       await addNewDataPayment();
-      console.log("ListItem : ", listItem);
-      console.log("transaksi : ", lp);
+      setBtnDisable(true);
     }
   };
 
-  // useEffect(() => {
-  //   transaksi = lp;
-  // }, [lp]);
+  const [insertDataProduct, { loading: loadingInsert }] = useMutation(addData);
+  const [addTransaksi, { loading: loadingAdd }] = useMutation(insertTransaksi);
+  const handleClickConfirmPayment = () => {
+    console.log(listItem);
+    insertDataProduct({
+      variables: {
+        objects: listItem,
+      },
+    });
+    console.log(lp);
+    addTransaksi({
+      variables: {
+        object: lp[0],
+      },
+    });
+    setBtnDisable(true);
+    dispatch(deleteAllListItem());
+    setBtnDisable(false);
+  };
 
   return (
     <>
@@ -70,7 +119,18 @@ const Index = () => {
             </strong>
           </div>
 
-          <Button className="bg-primary-2 my-2 border-0" onClick={handleClick}>
+          <Button
+            className="bg-warning text-dark fw-bolder mt-2 border-0"
+            onClick={handleClickConfirmProduct}
+            disabled={btnDisable}
+          >
+            KONFIRMASI PRODUK
+          </Button>
+          <Button
+            className="bg-primary my-1 border-0 "
+            onClick={handleClickConfirmPayment}
+            disabled={!btnDisable}
+          >
             KONFIRMASI PEMBAYARAN
           </Button>
         </Card>

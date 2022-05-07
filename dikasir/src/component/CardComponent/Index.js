@@ -14,23 +14,32 @@ const Index = ({ data }) => {
   const [qty, setQty] = useState(1);
   const [newData, setnewData] = useState({});
 
-  const addData = (qty, kodeNota) => {
-    if (qty > stok || qty === "") {
-      setQty(1);
-    } else {
-      setnewData({
-        id: id,
-        nama: nama,
-        harga: harga,
-        stok: stok,
-        quantity: qty,
-        kodeNota: kodeNota,
-      });
-    }
+  if (qty > stok || qty === "") {
+    setQty(1);
+  } else if (qty === 0) {
+    setQty(0);
+  }
+
+  const addData = (kodeNota) => {
+    const newList = {
+      nama: nama,
+      harga: harga,
+      // stok: stok,
+      quantity: qty,
+      kodeNota: kodeNota,
+      id_product: id,
+    };
+    setnewData(newList);
   };
 
+  console.log(newData);
+
+  // const handleClickAddListItem = () => {
+  //   dispatch(addListItem(newData));
+  // };
+
   useEffect(() => {
-    addData(qty, uuid);
+    addData(uuid);
   }, [listPayment]);
 
   // console.log("list Bayar : ", listPayment);
@@ -58,8 +67,8 @@ const Index = ({ data }) => {
             <button
               type="button"
               className="btn bg-warning-2 "
+              // onClick={handleClickAddListItem}
               onClick={() => dispatch(addListItem(newData))}
-              // onClick={addData}
             >
               <img src={addIcon} alt="tambah" width={15} />
             </button>

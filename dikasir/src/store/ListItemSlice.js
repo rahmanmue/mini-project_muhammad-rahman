@@ -11,7 +11,7 @@ export const ListItemSlice = createSlice({
   //   total, bayar, kembali, kodeNota
   // }
   initialState: {
-    uuid: "",
+    uuid: 0,
     listItem: [],
     listPayment: [],
   },

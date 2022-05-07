@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Button, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { newPayment } from "../../store/ListItemSlice";
-import { rupiah } from "../../util";
+import { toRupiah } from "../../utils/toRupiah";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -61,12 +61,12 @@ const Index = () => {
           </div>
           <div className="d-flex justify-content-between mt-2">
             <strong>Total </strong>
-            <strong className="">{rupiah(totalBayar)}</strong>
+            <strong className="">{toRupiah(totalBayar)}</strong>
           </div>
           <div className="d-flex justify-content-between mt-2">
             <strong>Kembali </strong>
             <strong className={kembali < 0 ? `text-danger ` : `text-primary `}>
-              {rupiah(kembali)}
+              {toRupiah(kembali)}
             </strong>
           </div>
 

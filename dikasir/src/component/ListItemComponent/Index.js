@@ -6,7 +6,7 @@ import {
   decrement,
 } from "../../store/ListItemSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { rupiah } from "../../util";
+import { toRupiah } from "../../utils/toRupiah";
 
 const Index = ({ item, index }) => {
   const { nama, harga, id } = item;
@@ -24,7 +24,7 @@ const Index = ({ item, index }) => {
           <strong className="title-item">{nama}</strong>
         </div>
         <div>
-          <span>{rupiah(harga)}</span>
+          <span>{toRupiah(harga)}</span>
         </div>
       </div>
       <div className="d-flex align-items-center ms-auto me-5">

@@ -3,7 +3,7 @@ import { Col, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addListItem } from "../../store/ListItemSlice";
 import { addIcon } from "../../assets";
-import { rupiah } from "../../util";
+import { toRupiah } from "../../utils/toRupiah";
 import { useSelector } from "react-redux";
 
 const Index = ({ data }) => {
@@ -42,7 +42,9 @@ const Index = ({ data }) => {
         <Card.Body>
           <div className="text-capitalize fw-bold">{nama}</div>
           <div className="my-2"> Stok : {stok}</div>
-          <div className="text-capitalize my-2 fw-bolder">{rupiah(harga)}</div>
+          <div className="text-capitalize my-2 fw-bolder">
+            {toRupiah(harga)}
+          </div>
           <div className="d-flex justify-content-between align-items-center">
             <input
               type="number"

@@ -9,7 +9,7 @@ import App from "./App";
 
 // import apollo
 import { ApolloProvider } from "@apollo/client";
-import client from "./gql/apollo-client";
+import client from "./graphql/apollo-client";
 
 // import react-redux & store
 import { Provider } from "react-redux";

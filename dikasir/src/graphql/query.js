@@ -12,8 +12,12 @@ const getDataProduk = gql`
   }
 `;
 
-const getDataNota = gql``;
+// const getDataNota = gql``;
 
-const getDataTransaksi = gql``;
+// const getDataTransaksi = gql``;
 
-export { getDataProduk, getDataNota, getDataTransaksi };
+export {
+  getDataProduk,
+  //  getDataNota,
+  //  getDataTransaksi
+};

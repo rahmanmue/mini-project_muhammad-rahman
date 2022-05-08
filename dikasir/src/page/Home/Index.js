@@ -10,24 +10,7 @@ import { v4 as uuidv4 } from "uuid";
 import { addUid } from "../../store/ListItemSlice";
 import { useGetDataProduct } from "../../hooks/index";
 
-import { gql, useQuery } from "@apollo/client";
-
-const getDataProduk = gql`
-  query MyQuery {
-    test_Produk {
-      id
-      namaProduk
-      stok
-      harga
-      gambar
-    }
-  }
-`;
-
 const Index = () => {
-  // graphql
-  // const { data, loading, error } = useQuery(getDataProduk);
-
   // graphql hooks
   const { data, loading, error } = useGetDataProduct();
 

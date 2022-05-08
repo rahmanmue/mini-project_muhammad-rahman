@@ -3,6 +3,12 @@ body{
     font-family: 'Montserrat', sans-serif;
 }
 
+nav{
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    -moz-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+}
+
 .title-item{
     font-size: 15px;
     font-weight: 700;

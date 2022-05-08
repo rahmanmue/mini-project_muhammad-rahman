@@ -10,6 +10,9 @@ import produkIcon from "./produk.svg";
 import dashboardIcon from "./dashboard.svg";
 import transaksiIcon from "./transaksi.svg";
 import stokIcon from "./stok.svg";
+import editIcon from "./edit.svg";
+import hapusIcon from "./hapus.svg";
+import infoIcon from "./info.svg";
 
 export {
   deleteAllIcon,
@@ -24,4 +27,7 @@ export {
   dashboardIcon,
   transaksiIcon,
   stokIcon,
+  editIcon,
+  hapusIcon,
+  infoIcon,
 };

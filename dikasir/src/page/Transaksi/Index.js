@@ -1,0 +1,27 @@
+import React from "react";
+import {
+  NavbarComponent,
+  SidebarComponent,
+  TabelTransaksiComponent,
+} from "../../component";
+import { Container, Row, Col } from "react-bootstrap";
+
+const Index = () => {
+  return (
+    <>
+      <NavbarComponent home={false} />
+      <Container>
+        <Row>
+          <Col md={3}>
+            <SidebarComponent />
+          </Col>
+          <Col md={9}>
+            <TabelTransaksiComponent />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
+
+export default Index;

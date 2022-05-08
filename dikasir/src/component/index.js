@@ -9,7 +9,9 @@ import LoadingComponent from "./LoadingComponent/Index.js";
 import NotFoundComponent from "./NotFoundComponent/Index";
 import SidebarComponent from "./SidebarComponent/Index";
 import DashboardComponent from "./DashboardComponent/Index";
-
+import TabelProdukComponent from "./ProdukComponent/TablelProduk";
+import InputProdukComponent from "./ProdukComponent/InputProduk";
+import TabelTransaksiComponent from "./TransaksiComponent/TabelTransaksi";
 export {
   NavbarComponent,
   ListProductsComponent,
@@ -22,4 +24,7 @@ export {
   NotFoundComponent,
   SidebarComponent,
   DashboardComponent,
+  TabelProdukComponent,
+  TabelTransaksiComponent,
+  InputProdukComponent,
 };

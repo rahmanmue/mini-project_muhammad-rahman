@@ -11,19 +11,22 @@ const Index = ({ data }) => {
   const dispatch = useDispatch();
   const listPayment = useSelector((state) => state.List.listPayment);
   const uuid = useSelector((state) => state.List.uuid);
-
-  const [newData, setnewData] = useState();
+  const [value, setValue] = useState();
 
   const addData = (kodeNota) => {
     const newList = {
+      id_product: id,
       nama: nama,
       harga: harga,
-      // stok: stok,
       quantity: 1,
       kodeNota: kodeNota,
-      id_product: id,
+      stok: stok,
     };
-    setnewData(newList);
+    setValue(newList);
+  };
+
+  const handleClickAddListItem = () => {
+    dispatch(addListItem(value));
   };
 
   // console.log(newData);
@@ -31,8 +34,6 @@ const Index = ({ data }) => {
   useEffect(() => {
     addData(uuid);
   }, [listPayment]);
-
-  // const handleClickAddListItem = () => {};
 
   return (
     <Col md={4} className="mt-5 px-3">
@@ -49,19 +50,7 @@ const Index = ({ data }) => {
             <button
               type="button"
               className="btn bg-warning-2 "
-              onClick={() =>
-                dispatch(
-                  addListItem({
-                    nama: nama,
-                    harga: harga,
-                    // stok: stok,
-                    quantity: 1,
-                    kodeNota: uuid,
-                    id: id,
-                  })
-                )
-              }
-              // onClick={handleClickAddListItem}
+              onClick={handleClickAddListItem}
             >
               <img src={addIcon} alt="tambah" width={15} />
             </button>

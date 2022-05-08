@@ -22,15 +22,19 @@ export const ListItemSlice = createSlice({
       };
 
       const update = (index) => {
-        state.listItem[index].quantity =
-          state.listItem[index].quantity + action.payload.quantity;
+        if (state.listItem[index].quantity >= state.listItem[index].stok) {
+          state.listItem[index].quantity = state.listItem[index].quantity;
+        } else {
+          state.listItem[index].quantity =
+            state.listItem[index].quantity + action.payload.quantity;
+        }
       };
 
       const checkState = (prevState) => {
         if (prevState.length > 0) {
           // filter semua state daj cek apakah yang diinputkan sudah ada di state
           prevState.forEach((item, index) => {
-            if (item.id === action.payload.id) {
+            if (item.id_product === action.payload.id_product) {
               newIndex = [index];
             }
           });
@@ -75,7 +79,7 @@ export const ListItemSlice = createSlice({
     },
     deleteListItem: (state, action) => {
       state.listItem = state.listItem.filter((item) => {
-        return item.id !== action.payload;
+        return item.id_product !== action.payload;
       });
     },
     deleteAllListItem: (state) => {

@@ -16,7 +16,7 @@ const Index = () => {
       <Col md={4} style={{ marginBottom: "200px" }} className="shadow px-3">
         <InfoComponent />
         {listItem.map((item, index) => (
-          <ListItemComponent item={item} key={item.id} index={index} />
+          <ListItemComponent item={item} key={item.id_product} index={index} />
         ))}
         <TotalPaymentComponent />
       </Col>

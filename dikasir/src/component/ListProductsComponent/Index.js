@@ -26,7 +26,7 @@ const Index = ({ data }) => {
     handleClick();
   }, [data, searchInput]);
 
-  console.log("Filter :", dataFilterProduct);
+  // console.log("Filter :", dataFilterProduct);
 
   return (
     <>
@@ -68,7 +68,7 @@ const Index = ({ data }) => {
 
         <Row>
           {dataFilterProduct.map((item) => (
-            <CardComponent key={item.id_product} data={item} />
+            <CardComponent key={item.id} data={item} />
           ))}
         </Row>
       </Col>

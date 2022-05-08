@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toRupiah } from "../../utils/toRupiah";
 
 const Index = ({ item, index }) => {
-  const { nama, harga, id } = item;
+  const { nama, harga, id_product } = item;
   const dispatch = useDispatch();
   const listItem = useSelector((state) => state.List.listItem);
   const quantity = listItem[index].quantity;
@@ -31,17 +31,6 @@ const Index = ({ item, index }) => {
         <div type="button" onClick={() => dispatch(decrement(index))}>
           <img src={minusIcon} alt="minus" />
         </div>
-        {/* <input
-          type="number"
-          name="qty"
-          min="1"
-          max={stok}
-          value={quantity}
-          className="form-control"
-          style={{ width: "90px", height: "35px" }}
-          // value={qty}
-          onChange={() => handleChange()}
-        /> */}
         <div
           className="bg-primary-4 px-4 mx-2"
           style={{ boxSizing: "border-box", width: "50px" }}
@@ -57,7 +46,7 @@ const Index = ({ item, index }) => {
         <div
           type="button"
           // className="ms-auto"
-          onClick={() => dispatch(deleteListItem(id))}
+          onClick={() => dispatch(deleteListItem(id_product))}
         >
           <img src={deleteIcon} alt="delete" />
         </div>

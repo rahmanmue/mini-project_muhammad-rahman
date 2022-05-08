@@ -11,38 +11,28 @@ const Index = ({ data }) => {
   const dispatch = useDispatch();
   const listPayment = useSelector((state) => state.List.listPayment);
   const uuid = useSelector((state) => state.List.uuid);
-  const [qty, setQty] = useState(1);
-  const [newData, setnewData] = useState({});
 
-  if (qty > stok || qty === "") {
-    setQty(1);
-  } else if (qty === 0) {
-    setQty(0);
-  }
+  const [newData, setnewData] = useState();
 
   const addData = (kodeNota) => {
     const newList = {
       nama: nama,
       harga: harga,
       // stok: stok,
-      quantity: qty,
+      quantity: 1,
       kodeNota: kodeNota,
       id_product: id,
     };
     setnewData(newList);
   };
 
-  console.log(newData);
-
-  // const handleClickAddListItem = () => {
-  //   dispatch(addListItem(newData));
-  // };
+  // console.log(newData);
 
   useEffect(() => {
     addData(uuid);
   }, [listPayment]);
 
-  // console.log("list Bayar : ", listPayment);
+  // const handleClickAddListItem = () => {};
 
   return (
     <Col md={4} className="mt-5 px-3">
@@ -51,24 +41,27 @@ const Index = ({ data }) => {
         <Card.Body>
           <div className="text-capitalize fw-bold">{nama}</div>
           <div className="my-2"> Stok : {stok}</div>
-          <div className="text-capitalize my-2 fw-bolder">
-            {toRupiah(harga)}
-          </div>
           <div className="d-flex justify-content-between align-items-center">
-            <input
-              type="number"
-              className="form-control"
-              max={stok}
-              min="1"
-              onChange={(e) => setQty(Number(e.target.value))}
-              placeholder={`Max : ${stok}`}
-              style={{ width: "70%" }}
-            />
+            <div className="text-capitalize my-2 fw-bolder">
+              {toRupiah(harga)}
+            </div>
+
             <button
               type="button"
               className="btn bg-warning-2 "
+              onClick={() =>
+                dispatch(
+                  addListItem({
+                    nama: nama,
+                    harga: harga,
+                    // stok: stok,
+                    quantity: 1,
+                    kodeNota: uuid,
+                    id: id,
+                  })
+                )
+              }
               // onClick={handleClickAddListItem}
-              onClick={() => dispatch(addListItem(newData))}
             >
               <img src={addIcon} alt="tambah" width={15} />
             </button>

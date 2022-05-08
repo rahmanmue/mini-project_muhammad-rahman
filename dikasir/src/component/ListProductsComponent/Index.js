@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react";
-import { Row, Col, Form, FormControl, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { CardComponent } from "../index";
 import { searchIcon } from "../../assets";
 import { filterProduct } from "../../utils/filterProduct";
-// import { addListItem } from "../../store/ListItemSlice";
-// import { useDispatch } from "react-redux";
 
 const Index = ({ data }) => {
   const [searchInput, setSearchInput] = useState("");
@@ -27,6 +25,8 @@ const Index = ({ data }) => {
   useEffect(() => {
     handleClick();
   }, [data, searchInput]);
+
+  console.log("Filter :", dataFilterProduct);
 
   return (
     <>
@@ -68,7 +68,7 @@ const Index = ({ data }) => {
 
         <Row>
           {dataFilterProduct.map((item) => (
-            <CardComponent key={item.id} data={item} />
+            <CardComponent key={item.id_product} data={item} />
           ))}
         </Row>
       </Col>

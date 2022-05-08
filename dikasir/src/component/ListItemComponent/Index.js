@@ -6,12 +6,17 @@ import {
   decrement,
 } from "../../store/ListItemSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { toRupiah } from "../../utils/toRupiah";
+import { toRupiah } from "../../utils/index";
 
 const Index = ({ item, index }) => {
-  const { nama, harga, id_product } = item;
+  // props item dari komponen result
+  const { namaProduk, harga, id_produk } = item;
+
+  // store redux
   const dispatch = useDispatch();
   const listItem = useSelector((state) => state.List.listItem);
+
+  // set quantity dari store redux
   const quantity = listItem[index].quantity;
 
   return (
@@ -21,7 +26,7 @@ const Index = ({ item, index }) => {
     >
       <div className="d-flex flex-column justify-content-center">
         <div>
-          <strong className="title-item">{nama}</strong>
+          <strong className="title-item">{namaProduk}</strong>
         </div>
         <div>
           <span>{toRupiah(harga)}</span>
@@ -43,11 +48,7 @@ const Index = ({ item, index }) => {
         </div>
       </div>
       <div className="d-flex align-items-center ">
-        <div
-          type="button"
-          // className="ms-auto"
-          onClick={() => dispatch(deleteListItem(id_product))}
-        >
+        <div type="button" onClick={() => dispatch(deleteListItem(id_produk))}>
           <img src={deleteIcon} alt="delete" />
         </div>
       </div>

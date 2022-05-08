@@ -12,9 +12,9 @@ import { addUid } from "../../store/ListItemSlice";
 
 const getData = gql`
   query MyQuery {
-    test_Product {
+    test_Produk {
       id
-      nama
+      namaProduk
       stok
       harga
       gambar
@@ -23,30 +23,33 @@ const getData = gql`
 `;
 
 const Index = () => {
+  // graphql
+  const { data, loading, error } = useQuery(getData);
+
+  // state produk
+  const [product, setProduct] = useState();
+
+  // store redux
   const listPayment = useSelector((state) => state.List.listPayment);
   const dispatch = useDispatch();
-  const uuid = uuidv4();
+
   // genetate uuid baru setiap ada listPayment
+  const uuid = uuidv4();
   useEffect(() => {
     dispatch(addUid(uuid));
   }, [listPayment]);
 
-  console.log(
-    "store Baru: ",
-    useSelector((state) => state.List.uuid)
-  );
-
-  const [product, setProduct] = useState();
-  const { data, loading, error } = useQuery(getData);
+  // setProduct dari data graphql
   useEffect(() => {
     if (data) {
-      setProduct(data?.test_Product || []);
+      setProduct(data?.test_Produk || []);
     }
   }, [data]);
 
+  // return data
   if (loading) return <div>loading...</div>;
   if (error) return <div>Error..</div>;
-  if (data.test_Product) {
+  if (data.test_Produk) {
     return (
       <>
         <NavbarComponent />

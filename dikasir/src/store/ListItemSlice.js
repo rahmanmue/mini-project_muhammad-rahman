@@ -34,7 +34,7 @@ export const ListItemSlice = createSlice({
         if (prevState.length > 0) {
           // filter semua state daj cek apakah yang diinputkan sudah ada di state
           prevState.forEach((item, index) => {
-            if (item.id_product === action.payload.id_product) {
+            if (item.id_produk === action.payload.id_produk) {
               newIndex = [index];
             }
           });
@@ -79,7 +79,7 @@ export const ListItemSlice = createSlice({
     },
     deleteListItem: (state, action) => {
       state.listItem = state.listItem.filter((item) => {
-        return item.id_product !== action.payload;
+        return item.id_produk !== action.payload;
       });
     },
     deleteAllListItem: (state) => {

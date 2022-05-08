@@ -3,44 +3,52 @@ import { Col, Card } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { addListItem } from "../../store/ListItemSlice";
 import { addIcon } from "../../assets";
-import { toRupiah } from "../../utils/toRupiah";
+import { toRupiah } from "../../utils/index";
 import { useSelector } from "react-redux";
 
 const Index = ({ data }) => {
-  const { nama, stok, harga, gambar, id } = data;
+  // props data dari komponen list produk
+  const { namaProduk, stok, harga, gambar, id } = data;
+
+  // store redux
   const dispatch = useDispatch();
   const listPayment = useSelector((state) => state.List.listPayment);
-  const uuid = useSelector((state) => state.List.uuid);
-  const [value, setValue] = useState();
 
+  // ambil data uuid dari store redux
+  const uuid = useSelector((state) => state.List.uuid);
+
+  // state newList
+  const [newList, setNewList] = useState();
+
+  // fungsi addData untuk update setiap list baru
   const addData = (kodeNota) => {
-    const newList = {
-      id_product: id,
-      nama: nama,
+    const list = {
+      id_produk: id,
+      namaProduk: namaProduk,
       harga: harga,
       quantity: 1,
       kodeNota: kodeNota,
       stok: stok,
     };
-    setValue(newList);
+    setNewList(list);
   };
 
-  const handleClickAddListItem = () => {
-    dispatch(addListItem(value));
-  };
-
-  // console.log(newData);
-
+  // update perubahan uuid ke addData ketika ada perubahan dari listpayment
   useEffect(() => {
     addData(uuid);
   }, [listPayment]);
+
+  // handleClick untuk menambah list item ke store redux
+  const handleClickAddListItem = () => {
+    dispatch(addListItem(newList));
+  };
 
   return (
     <Col md={4} className="mt-5 px-3">
       <Card className="rounded-5 ">
         <Card.Img variant="top" src={gambar} />
         <Card.Body>
-          <div className="text-capitalize fw-bold">{nama}</div>
+          <div className="text-capitalize fw-bold">{namaProduk}</div>
           <div className="my-2"> Stok : {stok}</div>
           <div className="d-flex justify-content-between align-items-center">
             <div className="text-capitalize my-2 fw-bolder">

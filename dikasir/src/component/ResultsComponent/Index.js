@@ -9,6 +9,7 @@ import {
 import { useSelector } from "react-redux";
 
 const Index = () => {
+  // list item dari store redux ketika data ditambahkan dari card komponen
   const listItem = useSelector((state) => state.List.listItem);
 
   return (
@@ -16,7 +17,7 @@ const Index = () => {
       <Col md={4} style={{ marginBottom: "200px" }} className="shadow px-3">
         <InfoComponent />
         {listItem.map((item, index) => (
-          <ListItemComponent item={item} key={item.id_product} index={index} />
+          <ListItemComponent item={item} key={item.id_produk} index={index} />
         ))}
         <TotalPaymentComponent />
       </Col>

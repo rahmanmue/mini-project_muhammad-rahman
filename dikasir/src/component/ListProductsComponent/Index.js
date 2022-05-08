@@ -2,17 +2,21 @@ import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { CardComponent } from "../index";
 import { searchIcon } from "../../assets";
-import { filterProduct } from "../../utils/filterProduct";
+import { filterProduct } from "../../utils/index";
 
 const Index = ({ data }) => {
+  // state serach
   const [searchInput, setSearchInput] = useState("");
 
+  // state filter untuk data produk
+  const [dataFilterProduct, setFilterProduct] = useState([]);
+
+  // handle perubahan set search input
   const handleChange = (e) => {
     setSearchInput(e.target.value);
   };
 
-  const [dataFilterProduct, setFilterProduct] = useState([]);
-
+  // handleclick search
   const handleClick = () => {
     setFilterProduct(
       filterProduct({
@@ -22,30 +26,16 @@ const Index = ({ data }) => {
     );
   };
 
+  // component didupdate ketika ada data dan searchinput
   useEffect(() => {
     handleClick();
   }, [data, searchInput]);
-
-  // console.log("Filter :", dataFilterProduct);
 
   return (
     <>
       <Col md={7} className="mt-5">
         <Row>
           <Col md={6}>
-            {/* <Form.Group className="d-flex">
-              <FormControl
-                type="search"
-                placeholder="Search"
-                aria-label="Search"
-                onChange={handleChange}
-                value={searchInput}
-              />
-              <span className="bg-primary-3 border-0" onClick={handleClick}>
-                <img src={searchIcon} alt="search-icon" />
-              </span>
-            </Form.Group> */}
-
             <div className="input-group mb-3">
               <input
                 type="search"

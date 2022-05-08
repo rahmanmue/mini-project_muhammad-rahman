@@ -5,8 +5,11 @@ import { deleteAllListItem } from "../../store/ListItemSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 const Index = () => {
+  // store redux
   const dispatch = useDispatch();
   const listItem = useSelector((state) => state.List.listItem);
+
+  // set total list item dari store redux listitem
   const totalListItem = listItem.length;
 
   return (

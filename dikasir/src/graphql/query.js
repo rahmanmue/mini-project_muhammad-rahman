@@ -1,6 +1,6 @@
 import { gql } from "@apollo/client";
 
-export const getDataProduk = gql`
+const getDataProduk = gql`
   query MyQuery {
     test_Produk {
       id
@@ -12,6 +12,8 @@ export const getDataProduk = gql`
   }
 `;
 
-export const getDataNota = gql``;
+const getDataNota = gql``;
 
-export const getDataTransaksi = gql``;
+const getDataTransaksi = gql``;
+
+export { getDataProduk, getDataNota, getDataTransaksi };

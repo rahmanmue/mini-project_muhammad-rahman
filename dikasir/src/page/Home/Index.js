@@ -6,11 +6,13 @@ import {
   ListProductsComponent,
   ResultsComponent,
 } from "../../component/index";
-import { gql, useQuery } from "@apollo/client";
 import { v4 as uuidv4 } from "uuid";
 import { addUid } from "../../store/ListItemSlice";
+// import { useGetDataProduct } from "../../hooks/index";
 
-const getData = gql`
+import { gql, useQuery } from "@apollo/client";
+
+const getDataProduk = gql`
   query MyQuery {
     test_Produk {
       id
@@ -24,7 +26,10 @@ const getData = gql`
 
 const Index = () => {
   // graphql
-  const { data, loading, error } = useQuery(getData);
+  const { data, loading, error } = useQuery(getDataProduk);
+
+  // graphql hooks
+  // const { data, loading, error } = useGetDataProduct();
 
   // state produk
   const [product, setProduct] = useState();
@@ -52,7 +57,7 @@ const Index = () => {
   if (data.test_Produk) {
     return (
       <>
-        <NavbarComponent />
+        <NavbarComponent home={true} />
         <Container fluid>
           <Row className="mb-5">
             <Col md={1}></Col>

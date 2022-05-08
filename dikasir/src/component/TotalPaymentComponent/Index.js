@@ -9,56 +9,7 @@ import {
   useInsertDataTransaksi,
 } from "../../hooks/index";
 
-// const addData = gql`
-//   mutation MyMutation($objects: [test_Nota_insert_input!] = {}) {
-//     insert_test_Nota(objects: $objects) {
-//       affected_rows
-//       returning {
-//         id
-//         id_produk
-//         kodeNota
-//         namaProduk
-//         quantity
-//         harga
-//       }
-//     }
-//   }
-// `;
-
-// const insertTransaksi = gql`
-//   mutation MyMutation($object: test_Transaksi_insert_input = {}) {
-//     insert_test_Transaksi_one(object: $object) {
-//       id
-//       total
-//       bayar
-//       kembali
-//       kodeNota
-//       tanggal
-//     }
-//   }
-// `;
-
-// const upsertDataProduk = gql`
-//   mutation MyMutation(
-//     $objects: [test_Produk_insert_input!] = {}
-//     $constraint: test_Produk_constraint = Product_pkey
-//   ) {
-//     insert_test_Produk(
-//       objects: $objects
-//       on_conflict: { constraint: $constraint, update_columns: stok }
-//     ) {
-//       affected_rows
-//     }
-//   }
-// `;
-
 const Index = () => {
-  // graphql
-  // const [insertDataProduct, { loading: loadingInsert }] = useMutation(addData);
-  // const [addTransaksi, { loading: loadingAdd }] = useMutation(insertTransaksi);
-  // const [upsertProduk, { loading: loadingUpsert }] =
-  //   useMutation(upsertDataProduk);
-
   // graphql hooks
   const { insertNota, loadingInsertNota } = useInsertDataNota();
   const { insertTransaksi, loadingInsertTransaksi } = useInsertDataTransaksi();
@@ -164,7 +115,6 @@ const Index = () => {
               max={totalBayar}
               onChange={(e) => setBayar(Number(e.target.value))}
               className="form-control "
-              // dir="rtl"
               style={{ width: "28%", height: "30px" }}
               placeholder=""
             />

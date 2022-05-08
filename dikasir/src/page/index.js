@@ -1,3 +1,3 @@
 import Home from "./Home/Index";
-
-export { Home };
+import Dashboard from "./Dashboard/Index";
+export { Home, Dashboard };

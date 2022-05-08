@@ -7,6 +7,8 @@ import TotalPaymentComponent from "./TotalPaymentComponent/Index";
 import CardComponent from "./CardComponent/Index.js";
 import LoadingComponent from "./LoadingComponent/Index.js";
 import NotFoundComponent from "./NotFoundComponent/Index";
+import SidebarComponent from "./SidebarComponent/Index";
+import DashboardComponent from "./DashboardComponent/Index";
 
 export {
   NavbarComponent,
@@ -18,4 +20,6 @@ export {
   CardComponent,
   LoadingComponent,
   NotFoundComponent,
+  SidebarComponent,
+  DashboardComponent,
 };

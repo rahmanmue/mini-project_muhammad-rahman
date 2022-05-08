@@ -6,6 +6,10 @@ import minusIcon from "./minus.svg";
 import searchIcon from "./search.svg";
 import logoIcon from "./Logo.svg";
 import userIcon from "./user-icon.svg";
+import produkIcon from "./produk.svg";
+import dashboardIcon from "./dashboard.svg";
+import transaksiIcon from "./transaksi.svg";
+import stokIcon from "./stok.svg";
 
 export {
   deleteAllIcon,
@@ -16,4 +20,8 @@ export {
   searchIcon,
   logoIcon,
   userIcon,
+  produkIcon,
+  dashboardIcon,
+  transaksiIcon,
+  stokIcon,
 };

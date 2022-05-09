@@ -9,10 +9,14 @@ import {
 import { v4 as uuidv4 } from "uuid";
 import { addUid } from "../../store/ListItemSlice";
 import { useGetDataProduct } from "../../hooks/index";
+import { useSubscribeDataProduct } from "../../hooks/index";
 
 const Index = () => {
-  // graphql hooks
-  const { data, loading, error } = useGetDataProduct();
+  // graphql hooks getData
+  // const { data, loading, error } = useGetDataProduct();
+
+  // graphgl subscribeDataProduk
+  const { data, loading, error } = useSubscribeDataProduct();
 
   // state produk
   const [product, setProduct] = useState();

@@ -1,5 +1,17 @@
 import { gql } from "@apollo/client";
 
-export const subscribeDataProduk = gql``;
-export const subscribeDataNota = gql``;
-export const subscribeDataTransaksi = gql``;
+const subscribeDataProduk = gql`
+  subscription MySubscription {
+    test_Produk {
+      id
+      namaProduk
+      harga
+      stok
+      gambar
+    }
+  }
+`;
+// export const subscribeDataNota = gql``;
+// export const subscribeDataTransaksi = gql``;
+
+export { subscribeDataProduk };

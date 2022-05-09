@@ -21,7 +21,7 @@ const Index = () => {
   const listPayment = useSelector((state) => state.List.listPayment);
 
   // bayar
-  const [bayar, setBayar] = useState(0);
+  const [bayar, setBayar] = useState("");
 
   // total bayar
   let totalBayar = 0;
@@ -67,7 +67,7 @@ const Index = () => {
     setBtnDisable(true);
     dispatch(deleteAllListItem());
     setBtnDisable(false);
-    setBayar(0);
+    setBayar("");
   };
 
   // konfirmasi pembayaran
@@ -114,6 +114,7 @@ const Index = () => {
               type="number"
               max={totalBayar}
               onChange={(e) => setBayar(Number(e.target.value))}
+              value={bayar || ""}
               className="form-control "
               style={{ width: "28%", height: "30px" }}
               placeholder=""

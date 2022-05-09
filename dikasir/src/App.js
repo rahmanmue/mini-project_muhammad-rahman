@@ -1,12 +1,20 @@
 import React from "react";
-import { Home, Dashboard, Product, Transaksi } from "./page/index";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Home, Dashboard, Product, Transaksi, AddProduct } from "./page/index";
 import "./App.css";
 
 function App() {
-  // return <Home />
-  return <Product />;
-  // return <Transaksi />;
-  // return <Dashboard />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/produk" element={<Product />} />
+        <Route path="/produk/tambah" element={<AddProduct />} />
+        <Route path="/transaksi" element={<Transaksi />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

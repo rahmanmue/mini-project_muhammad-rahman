@@ -8,7 +8,7 @@ const insertDataNota = gql`
         id
         id_produk
         kodeNota
-        nama
+        namaProduk
         quantity
         harga
       }
@@ -43,4 +43,30 @@ const upsertDataProduk = gql`
   }
 `;
 
-export { insertDataNota, insertDataTransaksi, upsertDataProduk };
+const insertDataProduk = gql`
+  mutation MyMutation($object: test_Produk_insert_input = {}) {
+    insert_test_Produk_one(object: $object) {
+      id
+      namaProduk
+      harga
+      stok
+      gambar
+    }
+  }
+`;
+
+const deleteDataProduk = gql`
+  mutation MyMutation($_eq: Int!) {
+    delete_test_Produk(where: { id: { _eq: $_eq } }) {
+      affected_rows
+    }
+  }
+`;
+
+export {
+  insertDataNota,
+  insertDataTransaksi,
+  upsertDataProduk,
+  insertDataProduk,
+  deleteDataProduk,
+};

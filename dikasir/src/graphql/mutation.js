@@ -63,10 +63,23 @@ const deleteDataProduk = gql`
   }
 `;
 
+const updateDataProduk = gql`
+  mutation MyMutation($id: Int!, $_set: test_Produk_set_input = {}) {
+    update_test_Produk_by_pk(pk_columns: { id: $id }, _set: $_set) {
+      id
+      namaProduk
+      stok
+      harga
+      gambar
+    }
+  }
+`;
+
 export {
   insertDataNota,
   insertDataTransaksi,
   upsertDataProduk,
   insertDataProduk,
   deleteDataProduk,
+  updateDataProduk,
 };

@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React from "react";
+import { useState, useEffect } from "react";
 import { Button, Row, Col, Alert } from "react-bootstrap";
 import { storage } from "../../firebase/firebase";
-import { useInsertDataProduct } from "../../hooks";
+import { useParams } from "react-router-dom";
+import { useGetDataProductById } from "../../hooks";
+import { useUpdateDataProduct } from "../../hooks";
 import { useNavigate } from "react-router-dom";
 
-const InputProduk = () => {
-  // navigasi halaman
+const EditProduk = () => {
+  // ambil id dan navigasi halaman
+  let { id } = useParams();
   const navigate = useNavigate();
 
-  // gql hook insert data produk
-  const { insertProduk, loadingInsertProduk } = useInsertDataProduct();
-
-  // alert
   const [show, setShow] = useState(false);
 
-  // state input
-  const [namaProduk, setNamaProduk] = useState("");
-  const [harga, setHarga] = useState();
-  const [stok, setStok] = useState();
+  // gql getpprodukbyid dan updateproduk
+  const { data } = useGetDataProductById(id);
+  const { updateProduk, loadingUpdateProduk } = useUpdateDataProduct();
+
+  const [state, setState] = useState();
+
+  // set data ke state
+  useEffect(() => {
+    if (data) {
+      setState(data?.test_Produk_by_pk || {});
+    }
+  }, [data]);
+
+  // handle perubahan setiap form input
+  const handleChange = (e) => {
+    setState({
+      ...state,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   // state input file
   const [file, setFile] = useState(null);
@@ -28,8 +44,10 @@ const InputProduk = () => {
     if (e.target.files[0]) setFile(e.target.files[0]);
   };
 
+  // handel info
   const [info, setInfo] = useState("Upload Gambar");
 
+  // handle Upload
   const handleUpload = async (e) => {
     e.preventDefault();
     const path = `/images/${file.name}`;
@@ -42,45 +60,46 @@ const InputProduk = () => {
     setInfo("Selesai...");
   };
 
-  // console.log(url);
-
-  const reset = () => {
-    setHarga("");
-    setNamaProduk("");
-    setStok("");
-    setInfo("Upload Gambar");
-  };
-
+  // handel Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-
-    const data = {
-      namaProduk: namaProduk,
-      harga: harga,
-      stok: stok,
-      gambar: url,
-    };
-
-    insertProduk({
+    let newData;
+    if (url === "") {
+      newData = {
+        namaProduk: state.namaProduk,
+        harga: state.harga,
+        stok: state.stok,
+        gambar: state.gambar,
+      };
+    } else {
+      newData = {
+        namaProduk: state.namaProduk,
+        harga: state.harga,
+        stok: state.stok,
+        gambar: url,
+      };
+    }
+    console.log(newData);
+    updateProduk({
       variables: {
-        object: data,
+        id: state.id,
+        _set: newData,
       },
     });
-    console.log(data);
+
     setShow(true);
-    reset();
   };
 
   return (
     <div className="mt-3">
-      <div className="title-menu text-dark-2">Tambah Produk</div>
+      <div className="title-menu text-dark-2">Edit Produk</div>
       <div className="underline-title bg-orange"></div>
 
       <Row>
         <Col md={10} className="my-4">
           {show ? (
             <Alert variant="success" onClose={() => setShow(false)} dismissible>
-              Data Berhasil ditambahkan{" "}
+              Data Berhasil diedit{" "}
               <span
                 className="alert-link text-decoration-underline"
                 type="button"
@@ -94,6 +113,8 @@ const InputProduk = () => {
             ""
           )}
           <div className="mb-3">
+            <input type="hidden" value={state?.id} />
+            <input type="hidden" value={state?.gambar} />
             <label htmlFor="namaProduk" className="form-label fw-bold fs-5">
               Nama Produk
             </label>
@@ -102,10 +123,8 @@ const InputProduk = () => {
               className="form-control"
               id="namaProduk"
               name="namaProduk"
-              value={namaProduk || " "}
-              onChange={(e) => {
-                setNamaProduk(e.target.value);
-              }}
+              value={state?.namaProduk}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-3">
@@ -117,10 +136,8 @@ const InputProduk = () => {
               className="form-control"
               id="harga"
               name="harga"
-              value={harga || ""}
-              onChange={(e) => {
-                setHarga(Number(e.target.value));
-              }}
+              value={state?.harga}
+              onChange={handleChange}
             />
           </div>
           <div className="mb-3">
@@ -132,10 +149,8 @@ const InputProduk = () => {
               className="form-control"
               id="stok"
               name="stok"
-              value={stok || ""}
-              onChange={(e) => {
-                setStok(Number(e.target.value));
-              }}
+              value={state?.stok}
+              onChange={handleChange}
             />
           </div>
           <label htmlFor="upload" className="form-label fw-bold fs-5 ">
@@ -153,16 +168,20 @@ const InputProduk = () => {
                 title="Tombol Upload tidak akan berfungsi jika belum dipilih gambar"
                 accept="image/x-png,image/gif,image/jpeg, image/jpg, image/svg"
               />
+
               <button className="input-group-text" disabled={!file}>
                 {info}
               </button>
             </div>
+            <span className="mt-1 text-warning">
+              Biarkan Jika tidak ingin diubah
+            </span>
           </form>
 
           <div className="d-flex gap-2 mt-4">
-            <Button onClick={handleSubmit}>Tambah</Button>
-            <Button className="bg-danger border-0" onClick={reset}>
-              Reset
+            <Button onClick={handleSubmit}>Edit</Button>
+            <Button className="bg-danger border-0" onClick={() => navigate(-1)}>
+              Kembali
             </Button>
           </div>
         </Col>
@@ -171,4 +190,4 @@ const InputProduk = () => {
   );
 };
 
-export default InputProduk;
+export default EditProduk;

@@ -132,14 +132,18 @@ const Index = () => {
           </div>
 
           <Button
-            className="bg-warning text-dark fw-bolder mt-2 border-0"
+            className={` mt-2 border-0 bg-warning ${
+              !btnDisable ? `fw-bolder  text-dark` : `fw-light`
+            }`}
             onClick={handleClickConfirmProduct}
             disabled={btnDisable}
           >
             KONFIRMASI PRODUK
           </Button>
           <Button
-            className="bg-primary my-1 border-0 "
+            className={`my-1  ${
+              !btnDisable ? `btn btn-outline-primary ` : `bg-primary`
+            }`}
             onClick={handleClickConfirmPayment}
             disabled={!btnDisable}
           >

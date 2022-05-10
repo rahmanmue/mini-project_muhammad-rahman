@@ -11,8 +11,8 @@ const TabelTransaksi = () => {
       <Row>
         <Col md={12} className="mt-5">
           <div className="table-responsive">
-            <table class="table table-bordered text-center">
-              <thead class="table-dark ">
+            <table className="table table-bordered text-center">
+              <thead className="table-dark ">
                 <tr>
                   <td>No</td>
                   <td>Tanggal</td>

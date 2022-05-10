@@ -11,6 +11,7 @@ import SidebarComponent from "./SidebarComponent/Index";
 import DashboardComponent from "./DashboardComponent/Index";
 import TabelProdukComponent from "./ProdukComponent/TablelProduk";
 import InputProdukComponent from "./ProdukComponent/InputProduk";
+import EditProdukComponent from "./ProdukComponent/EditProduk";
 import TabelTransaksiComponent from "./TransaksiComponent/TabelTransaksi";
 export {
   NavbarComponent,
@@ -27,4 +28,5 @@ export {
   TabelProdukComponent,
   TabelTransaksiComponent,
   InputProdukComponent,
+  EditProdukComponent,
 };

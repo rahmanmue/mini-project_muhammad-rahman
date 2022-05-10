@@ -52,9 +52,11 @@ const TablelProduk = ({ data }) => {
                     <td>{item.stok}</td>
                     <td>
                       <div className="d-flex gap-2 justify-content-center">
-                        <Button className="d-flex gap-2 bg-warning border-0 ">
-                          <img src={editIcon} alt="edit" />
-                        </Button>
+                        <Link to={`/produk/edit/${item.id}`}>
+                          <Button className="d-flex gap-2 bg-warning border-0 ">
+                            <img src={editIcon} alt="edit" />
+                          </Button>
+                        </Link>
                         <Button
                           className="d-flex gap-2 bg-danger border-0 "
                           onClick={() => hapusProduk(item.id)}

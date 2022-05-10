@@ -33,7 +33,7 @@ const Index = ({ data }) => {
 
   return (
     <>
-      <Col md={7} className="mt-5">
+      <Col md={7} className="mt-4">
         <Row>
           <Col md={6}>
             <div className="input-group mb-3">

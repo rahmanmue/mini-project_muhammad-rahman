@@ -11,7 +11,7 @@ const subscribeDataProduk = gql`
     }
   }
 `;
-// export const subscribeDataNota = gql``;
+
 // export const subscribeDataTransaksi = gql``;
 
 export { subscribeDataProduk };

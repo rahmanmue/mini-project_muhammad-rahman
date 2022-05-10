@@ -44,7 +44,7 @@ const Index = ({ data }) => {
   };
 
   return (
-    <Col md={4} className="mt-4 px-3">
+    <Col md={4} className="mt-4 px-3 ">
       <Card className="rounded-5 ">
         <Card.Img variant="top" src={gambar} />
         <Card.Body>

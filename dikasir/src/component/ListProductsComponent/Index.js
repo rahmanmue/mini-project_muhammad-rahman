@@ -33,14 +33,14 @@ const Index = ({ data }) => {
 
   return (
     <>
-      <Col md={7} className="mt-4">
+      <Col md={7} className="mt-4 m">
         <Row>
           <Col md={6}>
             <div className="input-group mb-3">
               <input
                 type="search"
                 className="form-control"
-                placeholder="Cari ..."
+                placeholder="Cari Nama Produk ..."
                 aria-label="cari"
                 aria-describedby="cari"
                 onChange={handleChange}

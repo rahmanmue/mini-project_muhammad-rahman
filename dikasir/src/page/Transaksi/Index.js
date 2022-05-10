@@ -10,9 +10,9 @@ const Index = () => {
   return (
     <>
       <NavbarComponent home={false} />
-      <Container>
+      <Container fluid>
         <Row>
-          <Col md={3}>
+          <Col md={2}>
             <SidebarComponent />
           </Col>
           <Col md={9}>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Button, Row, Col, Alert } from "react-bootstrap";
 import { storage } from "../../firebase/firebase";
 import { useInsertDataProduct } from "../../hooks";
@@ -28,18 +28,18 @@ const InputProduk = () => {
     if (e.target.files[0]) setFile(e.target.files[0]);
   };
 
-  const [info, setInfo] = useState("Upload Gambar");
+  const [info, setInfo] = useState("Klik Untuk Upload Gambar");
 
   const handleUpload = async (e) => {
     e.preventDefault();
     const path = `/images/${file.name}`;
     const ref = storage.ref(path);
-    setInfo("Tunggu...");
+    setInfo("wait");
     await ref.put(file);
     const url = await ref.getDownloadURL();
     setURL(url);
     setFile(null);
-    setInfo("Selesai...");
+    setInfo("done");
   };
 
   // console.log(url);
@@ -48,27 +48,35 @@ const InputProduk = () => {
     setHarga("");
     setNamaProduk("");
     setStok("");
-    setInfo("Upload Gambar");
+    setInfo("");
+    setURL("");
+    document.getElementById("gambar").value = "";
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const data = {
-      namaProduk: namaProduk,
-      harga: harga,
-      stok: stok,
-      gambar: url,
-    };
+    if (namaProduk === "" || harga === "" || stok === "") {
+      return alert("Beberapa Form Belum Terisi");
+    } else if (file === "" || url === "") {
+      return alert("Form Gambar Belum Terisi");
+    } else {
+      const data = {
+        namaProduk: namaProduk,
+        harga: harga,
+        stok: stok,
+        gambar: url,
+      };
 
-    insertProduk({
-      variables: {
-        object: data,
-      },
-    });
-    console.log(data);
-    setShow(true);
-    reset();
+      insertProduk({
+        variables: {
+          object: data,
+        },
+      });
+      console.log(data);
+      setShow(true);
+      reset();
+    }
   };
 
   return (
@@ -93,78 +101,120 @@ const InputProduk = () => {
           ) : (
             ""
           )}
-          <div className="mb-3">
-            <label htmlFor="namaProduk" className="form-label fw-bold fs-5">
-              Nama Produk
-            </label>
-            <input
-              type="text"
-              className="form-control"
-              id="namaProduk"
-              name="namaProduk"
-              value={namaProduk || " "}
-              onChange={(e) => {
-                setNamaProduk(e.target.value);
-              }}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="harga" className="form-label fw-bold fs-5">
-              Harga
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="harga"
-              name="harga"
-              value={harga || ""}
-              onChange={(e) => {
-                setHarga(Number(e.target.value));
-              }}
-            />
-          </div>
-          <div className="mb-3">
-            <label htmlFor="stok" className="form-label fw-bold fs-5">
-              Stok
-            </label>
-            <input
-              type="number"
-              className="form-control"
-              id="stok"
-              name="stok"
-              value={stok || ""}
-              onChange={(e) => {
-                setStok(Number(e.target.value));
-              }}
-            />
-          </div>
-          <label htmlFor="upload" className="form-label fw-bold fs-5 ">
-            Upload Gambar
-          </label>
-
-          <form onSubmit={handleUpload}>
-            <div className="input-group">
+          <form>
+            <div className="mb-3">
+              <label htmlFor="namaProduk" className="form-label fw-bold fs-5">
+                Nama Produk
+              </label>
               <input
-                type="file"
+                type="text"
                 className="form-control"
-                onChange={handleFileUpload}
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Tombol Upload tidak akan berfungsi jika belum dipilih gambar"
-                accept="image/x-png,image/gif,image/jpeg, image/jpg, image/svg"
+                id="namaProduk"
+                name="namaProduk"
+                value={namaProduk || " "}
+                onChange={(e) => {
+                  setNamaProduk(e.target.value);
+                }}
               />
-              <button className="input-group-text" disabled={!file}>
-                {info}
-              </button>
+            </div>
+            <div className="mb-3">
+              <label htmlFor="harga" className="form-label fw-bold fs-5">
+                Harga
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="harga"
+                name="harga"
+                min="1"
+                value={harga || ""}
+                onChange={(e) => {
+                  setHarga(Number(e.target.value));
+                }}
+              />
+            </div>
+            <div className="mb-3">
+              <label htmlFor="stok" className="form-label fw-bold fs-5">
+                Stok
+              </label>
+              <input
+                type="number"
+                className="form-control"
+                id="stok"
+                min="1"
+                name="stok"
+                value={stok || ""}
+                onChange={(e) => {
+                  setStok(Number(e.target.value));
+                }}
+                required
+              />
+            </div>
+            <Row>
+              <Col md={4}>
+                {url ? (
+                  <img src={url} alt="gambar" className="img-fluid " />
+                ) : (
+                  <img
+                    src={"https://www.um-surabaya.ac.id/assets/img/default.png"}
+                    alt="gambar"
+                    className="img-fluid "
+                  />
+                )}
+              </Col>
+              <Col md={8}>
+                <label htmlFor="upload" className="form-label fw-bold fs-5 ">
+                  Upload Gambar
+                </label>
+
+                <div className="input-group">
+                  <input
+                    type="file"
+                    id="gambar"
+                    className="form-control"
+                    onChange={handleFileUpload}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title="Tombol Upload tidak akan berfungsi jika belum dipilih gambar"
+                    accept="image/x-png,image/gif,image/jpeg, image/jpg, image/svg"
+                  />
+                </div>
+                <button
+                  className={`input-group-text mt-3 ${
+                    file ? "bg-orange text-white" : "not-allowed"
+                  } ${info === "done" ? "bg-primary text-white" : ""}`}
+                  disabled={!file}
+                  onClick={handleUpload}
+                >
+                  {info === "wait" ? (
+                    <>
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Loading...
+                    </>
+                  ) : info === "done" ? (
+                    " Selesai..."
+                  ) : info && file ? (
+                    info
+                  ) : (
+                    "Gambar Belum Dipilih"
+                  )}
+                </button>
+              </Col>
+            </Row>
+
+            <div className="d-flex gap-2 mt-4">
+              <Button onClick={handleSubmit} type="reset">
+                Tambah
+              </Button>
+              <Button className="bg-danger border-0" onClick={reset}>
+                Reset
+              </Button>
             </div>
           </form>
-
-          <div className="d-flex gap-2 mt-4">
-            <Button onClick={handleSubmit}>Tambah</Button>
-            <Button className="bg-danger border-0" onClick={reset}>
-              Reset
-            </Button>
-          </div>
         </Col>
       </Row>
     </div>

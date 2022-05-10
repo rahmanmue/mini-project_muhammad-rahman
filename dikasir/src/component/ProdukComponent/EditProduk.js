@@ -45,49 +45,53 @@ const EditProduk = () => {
   };
 
   // handel info
-  const [info, setInfo] = useState("Upload Gambar");
+  const [info, setInfo] = useState("Klik Untuk Upload Gambar");
 
   // handle Upload
   const handleUpload = async (e) => {
     e.preventDefault();
     const path = `/images/${file.name}`;
     const ref = storage.ref(path);
-    setInfo("Tunggu...");
+    setInfo("wait");
     await ref.put(file);
     const url = await ref.getDownloadURL();
     setURL(url);
     setFile(null);
-    setInfo("Selesai...");
+    setInfo("done");
   };
 
   // handel Submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newData;
-    if (url === "") {
-      newData = {
-        namaProduk: state.namaProduk,
-        harga: state.harga,
-        stok: state.stok,
-        gambar: state.gambar,
-      };
+    if (state.namaProduk === "" || state.harga === "" || state.stok === "") {
+      return alert("Beberapa Form Belum Terisi");
     } else {
-      newData = {
-        namaProduk: state.namaProduk,
-        harga: state.harga,
-        stok: state.stok,
-        gambar: url,
-      };
-    }
-    console.log(newData);
-    updateProduk({
-      variables: {
-        id: state.id,
-        _set: newData,
-      },
-    });
+      let newData;
+      if (url === "") {
+        newData = {
+          namaProduk: state.namaProduk,
+          harga: state.harga,
+          stok: state.stok,
+          gambar: state.gambar,
+        };
+      } else {
+        newData = {
+          namaProduk: state.namaProduk,
+          harga: state.harga,
+          stok: state.stok,
+          gambar: url,
+        };
+      }
+      console.log(newData);
+      updateProduk({
+        variables: {
+          id: state.id,
+          _set: newData,
+        },
+      });
 
-    setShow(true);
+      setShow(true);
+    }
   };
 
   return (
@@ -136,6 +140,7 @@ const EditProduk = () => {
               className="form-control"
               id="harga"
               name="harga"
+              min="1"
               value={state?.harga}
               onChange={handleChange}
             />
@@ -148,6 +153,7 @@ const EditProduk = () => {
               type="number"
               className="form-control"
               id="stok"
+              min="1"
               name="stok"
               value={state?.stok}
               onChange={handleChange}
@@ -157,29 +163,67 @@ const EditProduk = () => {
             Upload Gambar
           </label>
 
-          <form onSubmit={handleUpload}>
-            <div className="input-group">
-              <input
-                type="file"
-                className="form-control"
-                onChange={handleFileUpload}
-                data-bs-toggle="tooltip"
-                data-bs-placement="bottom"
-                title="Tombol Upload tidak akan berfungsi jika belum dipilih gambar"
-                accept="image/x-png,image/gif,image/jpeg, image/jpg, image/svg"
-              />
-
-              <button className="input-group-text" disabled={!file}>
-                {info}
-              </button>
-            </div>
-            <span className="mt-1 text-warning">
-              Biarkan Jika tidak ingin diubah
-            </span>
-          </form>
+          <Row>
+            <Col md={4}>
+              {url ? (
+                <img src={url} alt="gambar" className="img-fluid " />
+              ) : (
+                <img
+                  src={
+                    state?.gambar ||
+                    `https://www.um-surabaya.ac.id/assets/img/default.png`
+                  }
+                  alt="gambar"
+                  className="img-fluid "
+                />
+              )}
+            </Col>
+            <Col md={8}>
+              <form onSubmit={handleUpload}>
+                <div className="input-group">
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="gambar"
+                    onChange={handleFileUpload}
+                    data-bs-toggle="tooltip"
+                    data-bs-placement="bottom"
+                    title="Tombol Upload tidak akan berfungsi jika belum dipilih gambar"
+                    accept="image/x-png,image/gif,image/jpeg, image/jpg, image/svg"
+                  />
+                </div>
+                <button
+                  className={`input-group-text my-3 ${
+                    file ? "bg-orange text-white" : "not-allowed"
+                  } ${info === "done" ? "bg-primary text-white" : ""}`}
+                  disabled={!file}
+                >
+                  {info === "wait" ? (
+                    <>
+                      <span
+                        class="spinner-border spinner-border-sm"
+                        role="status"
+                        aria-hidden="true"
+                      ></span>
+                      Loading...
+                    </>
+                  ) : info === "done" ? (
+                    " Selesai..."
+                  ) : info && file ? (
+                    info
+                  ) : (
+                    "Upload Gambar"
+                  )}
+                </button>
+                <span className="mt-1 text-warning">
+                  Biarkan Jika Gambar tidak ingin diubah
+                </span>
+              </form>
+            </Col>
+          </Row>
 
           <div className="d-flex gap-2 mt-4">
-            <Button onClick={handleSubmit}>Edit</Button>
+            <Button onClick={handleSubmit}>Simpan</Button>
             <Button className="bg-danger border-0" onClick={() => navigate(-1)}>
               Kembali
             </Button>

@@ -7,6 +7,8 @@ import useInsertDataProduct from "./useInsertDataProduct";
 import useDeleteDataProduct from "./useDeleteDataProduct";
 import useSubscribeDataProduct from "./useSubscribeDataProduct";
 import useUpdateDataProduct from "./useUpdateDataProduct";
+import useGetDataNotaWhereKodeNota from "./useGetDataNotaWhereKodeNota";
+import useSubscribeDataTransaksi from "./useSubscribeDataTransaksi";
 
 export {
   useInsertDataNota,
@@ -18,4 +20,6 @@ export {
   useSubscribeDataProduct,
   useGetDataProductById,
   useUpdateDataProduct,
+  useGetDataNotaWhereKodeNota,
+  useSubscribeDataTransaksi,
 };

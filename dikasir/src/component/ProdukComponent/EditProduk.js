@@ -222,7 +222,7 @@ const EditProduk = () => {
             </Col>
           </Row>
 
-          <div className="d-flex gap-2 mt-4">
+          <div className="d-flex gap-2 mt-4 justify-content-end">
             <Button onClick={handleSubmit}>Simpan</Button>
             <Button className="bg-danger border-0" onClick={() => navigate(-1)}>
               Kembali

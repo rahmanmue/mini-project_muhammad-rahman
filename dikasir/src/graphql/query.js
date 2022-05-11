@@ -23,25 +23,32 @@ const getDataProdukById = gql`
     }
   }
 `;
-// const getDataProdukById = gql`
-//   query MyQuery2($_eq: Int!) {
-//     test_Produk(where: { id: { _eq: $_eq } }) {
-//       gambar
-//       harga
-//       id
-//       namaProduk
-//       stok
-//     }
-//   }
-// `;
 
-// const getDataNota = gql``;
-
-// const getDataTransaksi = gql``;
+const getDataNota = gql`
+  query MyQuery($_eq: uuid = "", $_eq2: uuid = "") {
+    test_Transaksi(where: { kodeNota: { _eq: $_eq } }) {
+      bayar
+      id
+      kembali
+      kodeNota
+      tanggal
+      total
+      rincian(where: { kodeNota: { _eq: $_eq2 } }) {
+        stok
+        quantity
+        namaProduk
+        kodeNota
+        id_produk
+        id
+        harga
+      }
+    }
+  }
+`;
 
 export {
   getDataProduk,
   getDataProdukById,
-  //  getDataNota,
+  getDataNota,
   //  getDataTransaksi
 };

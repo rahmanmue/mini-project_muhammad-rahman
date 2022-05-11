@@ -41,7 +41,9 @@ const Index = () => {
         </Col>
         <Col md={6} className="mt-3">
           <div className="box bg-danger-3 d-flex flex-column">
-            <div className="sub-title ms-auto text-white">Jumlah Transaksi</div>
+            <div className="sub-title ms-auto text-white">
+              Total Pengeluaran
+            </div>
             <div className="underline bg-white ms-auto w-25 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
               <div className="rupiah text-white">Rp. 18.000000</div>
@@ -50,7 +52,7 @@ const Index = () => {
         </Col>
         <Col md={6} className="mt-3">
           <div className="box bg-success-2 d-flex flex-column">
-            <div className="sub-title ms-auto text-white">Jumlah Transaksi</div>
+            <div className="sub-title ms-auto text-white">Total Pemasukan</div>
             <div className="underline bg-white ms-auto w-25 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
               <div className="rupiah text-white">Rp. 18.0000000</div>

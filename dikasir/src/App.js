@@ -7,6 +7,7 @@ import {
   Transaksi,
   AddProduct,
   EditProduct,
+  Rincian,
 } from "./page/index";
 import "./App.css";
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/produk/tambah" element={<AddProduct />} />
         <Route path="/produk/edit/:id" element={<EditProduct />} />
         <Route path="/transaksi" element={<Transaksi />} />
+        <Route path="/transaksi/rincian/:kodeNota" element={<Rincian />} />
       </Routes>
     </BrowserRouter>
   );

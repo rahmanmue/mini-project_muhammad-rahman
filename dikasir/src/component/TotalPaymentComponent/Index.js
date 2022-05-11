@@ -120,7 +120,7 @@ const Index = () => {
               placeholder=""
             />
           </div>
-          <div className="d-flex justify-content-between mt-2">
+          <div className="d-flex justify-content-between mt-2 ">
             <strong>Total </strong>
             <strong className="">{toRupiah(totalBayar)}</strong>
           </div>
@@ -132,8 +132,8 @@ const Index = () => {
           </div>
 
           <Button
-            className={` mt-2 border-0 bg-warning ${
-              !btnDisable ? `fw-bolder  text-dark` : `fw-light`
+            className={` mt-2 border-0 bg-warning-3 ${
+              !btnDisable ? `fw-bold text-white` : `fw-light`
             }`}
             onClick={handleClickConfirmProduct}
             disabled={btnDisable}

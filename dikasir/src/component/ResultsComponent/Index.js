@@ -17,7 +17,7 @@ const Index = () => {
       <Col
         md={4}
         style={{ marginBottom: "170px", minHeight: "100vh" }}
-        className="shadow px-3 pt-2"
+        className="shadow-left px-3 pt-2"
       >
         <InfoComponent />
         {listItem.map((item, index) => (

@@ -13,6 +13,7 @@ import TabelProdukComponent from "./ProdukComponent/TablelProduk";
 import InputProdukComponent from "./ProdukComponent/InputProduk";
 import EditProdukComponent from "./ProdukComponent/EditProduk";
 import TabelTransaksiComponent from "./TransaksiComponent/TabelTransaksi";
+import TabelRincianComponent from "./TransaksiComponent/TabelRincian";
 export {
   NavbarComponent,
   ListProductsComponent,
@@ -29,4 +30,5 @@ export {
   TabelTransaksiComponent,
   InputProdukComponent,
   EditProdukComponent,
+  TabelRincianComponent,
 };

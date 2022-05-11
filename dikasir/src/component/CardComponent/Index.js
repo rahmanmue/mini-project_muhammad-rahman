@@ -45,7 +45,7 @@ const Index = ({ data }) => {
 
   return (
     <Col md={4} className="mt-4 px-3 ">
-      <Card className="rounded-5 ">
+      <Card className="rounded-5 shadow-card">
         <Card.Img variant="top" src={gambar} />
         <Card.Body>
           <div className="text-capitalize fw-bold">{namaProduk}</div>
@@ -57,7 +57,7 @@ const Index = ({ data }) => {
 
             <button
               type="button"
-              className="btn bg-warning-2 "
+              className="btn bg-warning-2"
               onClick={handleClickAddListItem}
             >
               <img src={addIcon} alt="tambah" width={15} />

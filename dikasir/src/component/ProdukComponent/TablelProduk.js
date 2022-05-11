@@ -81,7 +81,7 @@ const TablelProduk = ({ data }) => {
         </Col>
 
         <Col md={12}>
-          <div className="table-responsive">
+          <div className="table-responsive mb-5">
             <table className="table table-bordered ">
               <thead className="table-dark ">
                 <tr className="text-center">

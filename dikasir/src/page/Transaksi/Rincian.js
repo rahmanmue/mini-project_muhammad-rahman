@@ -2,23 +2,29 @@ import React, { useEffect, useState } from "react";
 import {
   NavbarComponent,
   SidebarComponent,
-  TabelTransaksiComponent,
+  TabelRincianComponent,
 } from "../../component";
 import { Container, Row, Col } from "react-bootstrap";
-import { useSubscribeDataTransaksi } from "../../hooks";
+import { useParams, useNavigate } from "react-router-dom";
+import { useGetDataNotaWhereKodeNota } from "../../hooks";
 
 const Index = () => {
-  const { data, loading } = useSubscribeDataTransaksi();
+  let { kodeNota } = useParams();
+  const navigate = useNavigate();
 
-  const [transaksi, setTransaksi] = useState();
+  console.log(kodeNota);
 
+  const { data, loading, error } = useGetDataNotaWhereKodeNota(kodeNota);
+
+  const [rincian, setRincian] = useState();
+  // set data ke state
   useEffect(() => {
     if (data) {
-      setTransaksi(data.test_Transaksi);
+      setRincian(data?.test_Transaksi || []);
     }
   }, [data]);
 
-  console.log(transaksi);
+  console.log(rincian);
 
   return (
     <>
@@ -29,7 +35,7 @@ const Index = () => {
             <SidebarComponent />
           </Col>
           <Col md={9}>
-            <TabelTransaksiComponent data={transaksi} />
+            <TabelRincianComponent data={rincian} />
           </Col>
         </Row>
       </Container>

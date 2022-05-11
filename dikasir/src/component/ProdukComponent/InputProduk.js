@@ -206,7 +206,7 @@ const InputProduk = () => {
               </Col>
             </Row>
 
-            <div className="d-flex gap-2 mt-4">
+            <div className="d-flex gap-2 mt-4 justify-content-end">
               <Button onClick={handleSubmit} type="reset">
                 Tambah
               </Button>

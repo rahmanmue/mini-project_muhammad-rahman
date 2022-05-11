@@ -9,6 +9,11 @@ import useSubscribeDataProduct from "./useSubscribeDataProduct";
 import useUpdateDataProduct from "./useUpdateDataProduct";
 import useGetDataNotaWhereKodeNota from "./useGetDataNotaWhereKodeNota";
 import useSubscribeDataTransaksi from "./useSubscribeDataTransaksi";
+import useSubscribeJumlahProduk from "./useSubscribeJumlahProduk";
+import useSubscribeJumlahStok from "./useSubscribeJumlahStok";
+import useSubscribeJumlahTransaksi from "./useSubscribeJumlahTransaksi";
+import useSubscribePemasukan from "./useSubscribePemasukan";
+import useSubscribePengeluaran from "./useSubscribePengeluaran";
 
 export {
   useInsertDataNota,
@@ -22,4 +27,9 @@ export {
   useUpdateDataProduct,
   useGetDataNotaWhereKodeNota,
   useSubscribeDataTransaksi,
+  useSubscribeJumlahProduk,
+  useSubscribeJumlahStok,
+  useSubscribeJumlahTransaksi,
+  useSubscribePemasukan,
+  useSubscribePengeluaran,
 };

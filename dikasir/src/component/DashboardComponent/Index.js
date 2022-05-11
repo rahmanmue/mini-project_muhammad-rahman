@@ -1,8 +1,9 @@
 import React from "react";
 import { stokIcon, produkIcon, transaksiIcon } from "../../assets";
 import { Row, Col } from "react-bootstrap";
+import { toRupiah } from "../../utils";
 
-const Index = () => {
+const Index = ({ jP, jPl, jPm, jS, jTs }) => {
   return (
     <div className="mt-3">
       <div className="title-menu text-dark-2">Dashboard</div>
@@ -15,7 +16,7 @@ const Index = () => {
             <div className="underline bg-white ms-auto w-50 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
               <img src={produkIcon} alt="produk" width={92} />
-              <div className="total">18</div>
+              <div className="total">{jP}</div>
             </div>
           </div>
         </Col>
@@ -25,7 +26,7 @@ const Index = () => {
             <div className="underline bg-white ms-auto w-50 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
               <img src={stokIcon} alt="stok" width={92} />
-              <div className="total">149</div>
+              <div className="total">{jS}</div>
             </div>
           </div>
         </Col>
@@ -35,7 +36,7 @@ const Index = () => {
             <div className="underline bg-white ms-auto w-50 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
               <img src={transaksiIcon} alt="transaksi" width={92} />
-              <div className="total">18</div>
+              <div className="total">{jTs}</div>
             </div>
           </div>
         </Col>
@@ -46,7 +47,7 @@ const Index = () => {
             </div>
             <div className="underline bg-white ms-auto w-25 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
-              <div className="rupiah text-white">Rp. 18.000000</div>
+              <div className="rupiah text-white">{toRupiah(jPl)}</div>
             </div>
           </div>
         </Col>
@@ -55,7 +56,7 @@ const Index = () => {
             <div className="sub-title ms-auto text-white">Total Pemasukan</div>
             <div className="underline bg-white ms-auto w-25 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
-              <div className="rupiah text-white">Rp. 18.0000000</div>
+              <div className="rupiah text-white">{toRupiah(jPm)}</div>
             </div>
           </div>
         </Col>

@@ -63,7 +63,7 @@ const subscribePemasukan = gql`
   }
 `;
 
-const subsribeJumlahProduk = gql`
+const subscribeJumlahProduk = gql`
   subscription MySubscription4 {
     test_Produk_aggregate {
       aggregate {
@@ -89,6 +89,6 @@ export {
   subscribeJumlahStok,
   subscribePemasukan,
   subscribePengeluaran,
-  subsribeJumlahProduk,
+  subscribeJumlahProduk,
   subscribeJumlahTransaksi,
 };

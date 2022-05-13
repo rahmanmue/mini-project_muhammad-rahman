@@ -63,6 +63,14 @@ const deleteDataProduk = gql`
   }
 `;
 
+const deleteDataTransaksi = gql`
+  mutation MyMutation($_eq: Int!) {
+    delete_test_Transaksi(where: { id: { _eq: $_eq } }) {
+      affected_rows
+    }
+  }
+`;
+
 const updateDataProduk = gql`
   mutation MyMutation($id: Int!, $_set: test_Produk_set_input = {}) {
     update_test_Produk_by_pk(pk_columns: { id: $id }, _set: $_set) {
@@ -82,4 +90,5 @@ export {
   insertDataProduk,
   deleteDataProduk,
   updateDataProduk,
+  deleteDataTransaksi,
 };

@@ -3,6 +3,7 @@ import { Button, Row, Col, Alert } from "react-bootstrap";
 import { storage } from "../../firebase/firebase";
 import { useInsertDataProduct } from "../../hooks";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const InputProduk = () => {
   // navigasi halaman
@@ -10,9 +11,6 @@ const InputProduk = () => {
 
   // gql hook insert data produk
   const { insertProduk, loadingInsertProduk } = useInsertDataProduct();
-
-  // alert
-  const [show, setShow] = useState(false);
 
   // state input
   const [namaProduk, setNamaProduk] = useState("");
@@ -57,9 +55,14 @@ const InputProduk = () => {
     e.preventDefault();
 
     if (namaProduk === "" || harga === "" || stok === "") {
-      return alert("Beberapa Form Belum Terisi");
+      // return alert("Beberapa Form Belum Terisi");
+      swal("Perhatian!", "Beberapa Form Belum Terisi!", "warning", {
+        button: true,
+      });
     } else if (file === "" || url === "") {
-      return alert("Form Gambar Belum Terisi");
+      swal("Perhatian!", "Gambar Belum Terupload!", "warning", {
+        button: true,
+      });
     } else {
       const data = {
         namaProduk: namaProduk,
@@ -74,7 +77,9 @@ const InputProduk = () => {
         },
       });
       console.log(data);
-      setShow(true);
+      swal("Berhasil", "Data Berhasil Ditambahkan", "success", {
+        button: true,
+      });
       reset();
     }
   };
@@ -86,21 +91,6 @@ const InputProduk = () => {
 
       <Row>
         <Col md={10} className="my-4">
-          {show ? (
-            <Alert variant="success" onClose={() => setShow(false)} dismissible>
-              Data Berhasil ditambahkan{" "}
-              <span
-                className="alert-link text-decoration-underline"
-                type="button"
-                onClick={() => navigate(-1)}
-              >
-                {" "}
-                Kembali Ke halaman Produk.
-              </span>
-            </Alert>
-          ) : (
-            ""
-          )}
           <form>
             <div className="mb-3">
               <label htmlFor="namaProduk" className="form-label fw-bold fs-5">
@@ -207,11 +197,12 @@ const InputProduk = () => {
             </Row>
 
             <div className="d-flex gap-2 mt-4 justify-content-end">
-              <Button onClick={handleSubmit} type="reset">
-                Tambah
-              </Button>
-              <Button className="bg-danger border-0" onClick={reset}>
+              <Button onClick={handleSubmit}>Tambah</Button>
+              <Button className="btn-danger" onClick={reset}>
                 Reset
+              </Button>
+              <Button className="btn-warning" onClick={() => navigate(-1)}>
+                Kembali
               </Button>
             </div>
           </form>

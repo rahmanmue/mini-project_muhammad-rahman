@@ -35,7 +35,11 @@ const Index = () => {
             <SidebarComponent />
           </Col>
           <Col md={9}>
-            <TabelRincianComponent data={rincian} />
+            <TabelRincianComponent
+              data={rincian}
+              loading={loading}
+              error={error}
+            />
           </Col>
         </Row>
       </Container>

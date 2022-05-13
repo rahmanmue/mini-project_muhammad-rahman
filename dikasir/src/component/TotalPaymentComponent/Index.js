@@ -8,6 +8,7 @@ import {
   useUpsertDataProduct,
   useInsertDataTransaksi,
 } from "../../hooks/index";
+import swal from "sweetalert";
 
 const Index = () => {
   // graphql hooks
@@ -100,6 +101,8 @@ const Index = () => {
         objects: upsertData,
       },
     });
+
+    swal("Berhasil!", "Konfirmasi Pembayaran Berhasil!", "success");
 
     resetData();
   };

@@ -5,6 +5,7 @@ import useGetDataProduct from "./useGetDataProduct";
 import useGetDataProductById from "./useGetDataProductById";
 import useInsertDataProduct from "./useInsertDataProduct";
 import useDeleteDataProduct from "./useDeleteDataProduct";
+import useDeleteDataTransaksi from "./useDeleteDataTransaksi";
 import useSubscribeDataProduct from "./useSubscribeDataProduct";
 import useUpdateDataProduct from "./useUpdateDataProduct";
 import useGetDataNotaWhereKodeNota from "./useGetDataNotaWhereKodeNota";
@@ -21,6 +22,7 @@ export {
   useUpsertDataProduct,
   useGetDataProduct,
   useInsertDataProduct,
+  useDeleteDataTransaksi,
   useDeleteDataProduct,
   useSubscribeDataProduct,
   useGetDataProductById,

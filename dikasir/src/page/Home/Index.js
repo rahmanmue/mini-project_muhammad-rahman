@@ -8,7 +8,7 @@ import {
 } from "../../component/index";
 import { v4 as uuidv4 } from "uuid";
 import { addUid } from "../../store/ListItemSlice";
-import { useGetDataProduct } from "../../hooks/index";
+// import { useGetDataProduct } from "../../hooks/index";
 import { useSubscribeDataProduct } from "../../hooks/index";
 
 const Index = () => {
@@ -38,23 +38,22 @@ const Index = () => {
     }
   }, [data]);
 
-  // return data
-  if (loading) return <div>loading...</div>;
-  if (error) return <div>Error..</div>;
-  if (data.test_Produk) {
-    return (
-      <>
-        <NavbarComponent home={true} />
-        <Container fluid>
-          <Row className="mb-5">
-            <Col md={1}></Col>
-            <ListProductsComponent data={product || []} />
-            <ResultsComponent />
-          </Row>
-        </Container>
-      </>
-    );
-  }
+  return (
+    <>
+      <NavbarComponent home={true} />
+      <Container fluid>
+        <Row className="mb-5">
+          <Col md={1}></Col>
+          <ListProductsComponent
+            data={product || []}
+            loading={loading}
+            error={error}
+          />
+          <ResultsComponent />
+        </Row>
+      </Container>
+    </>
+  );
 };
 
 export default Index;

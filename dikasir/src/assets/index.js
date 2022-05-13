@@ -13,6 +13,10 @@ import stokIcon from "./stok.svg";
 import editIcon from "./edit.svg";
 import hapusIcon from "./hapus.svg";
 import infoIcon from "./info.svg";
+import deleteredIcon from "./delete-red.svg";
+import resetIcon from "./reset.svg";
+import noDataIcon from "./nodata.svg";
+import serverErrorIcon from "./server-error.svg";
 
 export {
   deleteAllIcon,
@@ -30,4 +34,8 @@ export {
   editIcon,
   hapusIcon,
   infoIcon,
+  deleteredIcon,
+  resetIcon,
+  noDataIcon,
+  serverErrorIcon,
 };

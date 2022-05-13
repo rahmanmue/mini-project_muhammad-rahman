@@ -3,6 +3,7 @@ import {
   NavbarComponent,
   SidebarComponent,
   DashboardComponent,
+  LoadingComponent,
 } from "../../component";
 import { Container, Row, Col } from "react-bootstrap";
 import {
@@ -52,8 +53,10 @@ const Dashboard = () => {
   // console.log(s);
   // console.log(t);
 
+  // return <LoadingComponent />;
+
   if (lP || lS || lTs || lPl || lPm) {
-    return <p>Loading ....</p>;
+    return <LoadingComponent />;
   } else if (errP || errPl || errPm || errS || errTs) {
     return <p>Errorr ....</p>;
   } else if (jP || jS || jTs || jPl || jPm) {

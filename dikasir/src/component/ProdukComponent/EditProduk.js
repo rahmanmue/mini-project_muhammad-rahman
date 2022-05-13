@@ -6,13 +6,12 @@ import { useParams } from "react-router-dom";
 import { useGetDataProductById } from "../../hooks";
 import { useUpdateDataProduct } from "../../hooks";
 import { useNavigate } from "react-router-dom";
+import swal from "sweetalert";
 
 const EditProduk = () => {
   // ambil id dan navigasi halaman
   let { id } = useParams();
   const navigate = useNavigate();
-
-  const [show, setShow] = useState(false);
 
   // gql getpprodukbyid dan updateproduk
   const { data } = useGetDataProductById(id);
@@ -64,7 +63,9 @@ const EditProduk = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (state.namaProduk === "" || state.harga === "" || state.stok === "") {
-      return alert("Beberapa Form Belum Terisi");
+      swal("Perhatian!", "Beberapa Form Belum Terisi!", "warning", {
+        button: true,
+      });
     } else {
       let newData;
       if (url === "") {
@@ -90,7 +91,9 @@ const EditProduk = () => {
         },
       });
 
-      setShow(true);
+      swal("Berhasil", "Data Berhasil Diedit", "success", {
+        button: true,
+      });
     }
   };
 
@@ -101,21 +104,6 @@ const EditProduk = () => {
 
       <Row>
         <Col md={10} className="my-4">
-          {show ? (
-            <Alert variant="success" onClose={() => setShow(false)} dismissible>
-              Data Berhasil diedit{" "}
-              <span
-                className="alert-link text-decoration-underline"
-                type="button"
-                onClick={() => navigate(-1)}
-              >
-                {" "}
-                Kembali Ke halaman Produk.
-              </span>
-            </Alert>
-          ) : (
-            ""
-          )}
           <div className="mb-3">
             <input type="hidden" value={state?.id} />
             <input type="hidden" value={state?.gambar} />
@@ -224,7 +212,10 @@ const EditProduk = () => {
 
           <div className="d-flex gap-2 mt-4 justify-content-end">
             <Button onClick={handleSubmit}>Simpan</Button>
-            <Button className="bg-danger border-0" onClick={() => navigate(-1)}>
+            <Button
+              className="btn-warning border-0"
+              onClick={() => navigate(-1)}
+            >
               Kembali
             </Button>
           </div>

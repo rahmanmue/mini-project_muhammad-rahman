@@ -1,10 +1,15 @@
 import { useEffect, useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import { CardComponent } from "../index";
+import {
+  CardComponent,
+  ErrorComponent,
+  LoadingComponent,
+  NoDataComponent,
+} from "../index";
 import { searchIcon } from "../../assets";
 import { filterProduct } from "../../utils/index";
 
-const Index = ({ data }) => {
+const Index = ({ data, loading, error }) => {
   // state serach
   const [searchInput, setSearchInput] = useState("");
 
@@ -22,6 +27,7 @@ const Index = ({ data }) => {
       filterProduct({
         dataProduct: data,
         searchInput: searchInput,
+        toTable: false,
       })
     );
   };
@@ -55,11 +61,18 @@ const Index = ({ data }) => {
             </div>
           </Col>
         </Row>
-
         <Row>
-          {dataFilterProduct.map((item) => (
-            <CardComponent key={item.id} data={item} />
-          ))}
+          {loading ? (
+            <LoadingComponent />
+          ) : error ? (
+            <ErrorComponent />
+          ) : dataFilterProduct.length !== 0 ? (
+            dataFilterProduct.map((item) => (
+              <CardComponent key={item.id} data={item} />
+            ))
+          ) : (
+            <NoDataComponent />
+          )}
         </Row>
       </Col>
     </>

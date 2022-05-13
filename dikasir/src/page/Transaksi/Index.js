@@ -8,7 +8,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import { useSubscribeDataTransaksi } from "../../hooks";
 
 const Index = () => {
-  const { data, loading } = useSubscribeDataTransaksi();
+  const { data, loading, error } = useSubscribeDataTransaksi();
 
   const [transaksi, setTransaksi] = useState();
 
@@ -18,7 +18,7 @@ const Index = () => {
     }
   }, [data]);
 
-  console.log(transaksi);
+  // console.log(transaksi);
 
   return (
     <>
@@ -29,7 +29,11 @@ const Index = () => {
             <SidebarComponent />
           </Col>
           <Col md={9}>
-            <TabelTransaksiComponent data={transaksi} />
+            <TabelTransaksiComponent
+              data={transaksi}
+              loading={loading}
+              error={error}
+            />
           </Col>
         </Row>
       </Container>

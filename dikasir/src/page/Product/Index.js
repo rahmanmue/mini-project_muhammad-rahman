@@ -31,7 +31,11 @@ const Index = () => {
             <SidebarComponent />
           </Col>
           <Col md={9}>
-            <TabelProdukComponent data={product || []} />
+            <TabelProdukComponent
+              data={product || []}
+              loading={loading}
+              error={error}
+            />
           </Col>
         </Row>
       </Container>

@@ -5,6 +5,7 @@ import AddProduct from "./Product/AddProduct";
 import EditProduct from "./Product/EditProduct";
 import Transaksi from "./Transaksi/Index";
 import Rincian from "./Transaksi/Rincian";
+import NotFound from "./NotFound/Index";
 export {
   Home,
   Dashboard,
@@ -13,4 +14,5 @@ export {
   AddProduct,
   EditProduct,
   Rincian,
+  NotFound,
 };

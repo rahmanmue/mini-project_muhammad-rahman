@@ -4,6 +4,8 @@ import { Row, Col } from "react-bootstrap";
 import { toRupiah } from "../../utils";
 
 const Index = ({ jP, jPl, jPm, jS, jTs }) => {
+  // { jP, jPl, jPm, jS, jTs } from componenet page dashboard
+
   return (
     <div className="mt-3">
       <div className="title-menu text-dark-2">Dashboard</div>

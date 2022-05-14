@@ -28,28 +28,28 @@ const Dashboard = () => {
   const { data: jPl, loading: lPl, error: errPl } = useSubscribeDataProduct();
   const { data: jPm, loading: lPm, error: errPm } = useSubscribePemasukan();
 
-  const [a, sa] = useState();
-  const [b, sb] = useState();
-  const [c, sc] = useState();
-  const [d, sd] = useState();
-  const [e, se] = useState();
+  const [produk, setProduk] = useState();
+  const [stok, setStok] = useState();
+  const [transaksi, setTransaksi] = useState();
+  const [pengeluaran, setPengeluaran] = useState();
+  const [pembayaran, setPembayaran] = useState();
 
   useEffect(() => {
     if (jP || jS || jTs || jPl || jPm) {
-      sa(jP?.dikasir_Produk_aggregate || []);
-      sb(jS?.dikasir_Produk_aggregate || []);
-      sc(jTs?.dikasir_Transaksi_aggregate || []);
-      sd(jPl?.dikasir_Produk || []);
-      se(jPm?.dikasir_Transaksi_aggregate || []);
+      setProduk(jP?.dikasir_Produk_aggregate || []);
+      setStok(jS?.dikasir_Produk_aggregate || []);
+      setTransaksi(jTs?.dikasir_Transaksi_aggregate || []);
+      setPengeluaran(jPl?.dikasir_Produk || []);
+      setPembayaran(jPm?.dikasir_Transaksi_aggregate || []);
     }
   }, [jP, jS, jTs, jPl, jPm]);
 
-  const jumlahProduk = a?.aggregate?.count || "0";
-  const jumlahSemuaStok = b?.aggregate?.sum?.stok || "0";
-  const jumlahTransaksi = c?.aggregate?.count || "0";
-  const jumlahPembayaran = e?.aggregate?.sum?.total || "";
+  const jumlahProduk = produk?.aggregate?.count || "0";
+  const jumlahSemuaStok = stok?.aggregate?.sum?.stok || "0";
+  const jumlahTransaksi = transaksi?.aggregate?.count || "0";
+  const jumlahPembayaran = pembayaran?.aggregate?.sum?.total || "";
   let totalHargaSemuaProduk = 0;
-  totalHargaSemuaProduk = d?.reduce((total, aliasListItem) => {
+  totalHargaSemuaProduk = pengeluaran?.reduce((total, aliasListItem) => {
     return total + aliasListItem.harga * aliasListItem.stok;
   }, 0);
 
@@ -58,8 +58,6 @@ const Dashboard = () => {
   // console.log(r);
   // console.log(s);
   // console.log(t);
-
-  // return <LoadingComponent />;
 
   if (lP || lS || lTs || lPl || lPm) {
     return <LoadingComponent />;

@@ -76,7 +76,7 @@ const InputProduk = () => {
           object: data,
         },
       });
-      console.log(data);
+      // console.log(data);
       swal("Berhasil", "Data Berhasil Ditambahkan", "success", {
         button: true,
       });

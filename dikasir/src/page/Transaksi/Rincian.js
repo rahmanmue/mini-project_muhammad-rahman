@@ -5,14 +5,11 @@ import {
   TabelRincianComponent,
 } from "../../component";
 import { Container, Row, Col } from "react-bootstrap";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetDataNotaWhereKodeNota } from "../../hooks";
 
 const Index = () => {
   let { kodeNota } = useParams();
-  const navigate = useNavigate();
-
-  console.log(kodeNota);
 
   const { data, loading, error } = useGetDataNotaWhereKodeNota(kodeNota);
 
@@ -23,8 +20,6 @@ const Index = () => {
       setRincian(data?.dikasir_Transaksi || []);
     }
   }, [data]);
-
-  console.log(rincian);
 
   return (
     <>

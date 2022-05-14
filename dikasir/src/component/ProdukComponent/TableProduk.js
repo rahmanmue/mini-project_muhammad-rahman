@@ -11,6 +11,7 @@ import swal from "sweetalert";
 import { ErrorComponent, LoadingComponent, NoDataComponent } from "..";
 
 const TableProduk = ({ data, loading, error }) => {
+  // hooks gql deleteproduct
   const { deleteProduk } = useDeleteDataProduct();
 
   // state serach

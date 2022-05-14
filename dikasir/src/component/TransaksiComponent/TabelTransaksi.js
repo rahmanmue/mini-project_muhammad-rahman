@@ -10,6 +10,7 @@ import swal from "sweetalert";
 import { ErrorComponent, LoadingComponent, NoDataComponent } from "..";
 
 const TabelTransaksi = ({ data, loading, error }) => {
+  // hooks tanggal
   const [tanggal, setTanggal] = useState("");
 
   // delete

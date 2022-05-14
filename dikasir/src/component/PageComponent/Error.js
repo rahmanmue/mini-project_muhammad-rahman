@@ -16,7 +16,7 @@ const Error = () => {
           width={"20%"}
         />
         <div className="fw-bold text-dark-2 mt-2">
-          Oopss... jaringan bermasalah
+          Error... jaringan bermasalah
         </div>
       </div>
     </Container>

@@ -40,7 +40,7 @@ const Index = ({ home }) => {
             <div className="ms-auto">
               <Link to="/" className="text-decoration-none">
                 <Button className="bg-transparent border border-white rounded me-2 px-4">
-                  Menu Kasir
+                  MENU KASIR
                 </Button>
               </Link>
             </div>

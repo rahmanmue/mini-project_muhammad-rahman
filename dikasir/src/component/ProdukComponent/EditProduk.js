@@ -83,7 +83,7 @@ const EditProduk = () => {
           gambar: url,
         };
       }
-      console.log(newData);
+      // console.log(newData);
       updateProduk({
         variables: {
           id: state.id,
@@ -105,8 +105,8 @@ const EditProduk = () => {
       <Row>
         <Col md={10} className="my-4">
           <div className="mb-3">
-            <input type="hidden" value={state?.id} />
-            <input type="hidden" value={state?.gambar} />
+            <input type="hidden" value={state?.id || ""} />
+            <input type="hidden" value={state?.gambar || ""} />
             <label htmlFor="namaProduk" className="form-label fw-bold fs-5">
               Nama Produk
             </label>
@@ -115,7 +115,7 @@ const EditProduk = () => {
               className="form-control"
               id="namaProduk"
               name="namaProduk"
-              value={state?.namaProduk}
+              value={state?.namaProduk || ""}
               onChange={handleChange}
             />
           </div>
@@ -129,7 +129,7 @@ const EditProduk = () => {
               id="harga"
               name="harga"
               min="1"
-              value={state?.harga}
+              value={state?.harga || ""}
               onChange={handleChange}
             />
           </div>
@@ -143,7 +143,7 @@ const EditProduk = () => {
               id="stok"
               min="1"
               name="stok"
-              value={state?.stok}
+              value={state?.stok || ""}
               onChange={handleChange}
             />
           </div>
@@ -162,7 +162,7 @@ const EditProduk = () => {
                     `https://www.um-surabaya.ac.id/assets/img/default.png`
                   }
                   alt="gambar"
-                  className="img-fluid "
+                  className="img-fluid mb-3"
                 />
               )}
             </Col>

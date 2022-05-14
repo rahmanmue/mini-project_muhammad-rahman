@@ -4,6 +4,7 @@ import {
   SidebarComponent,
   DashboardComponent,
   LoadingComponent,
+  ErrorComponent,
 } from "../../component";
 import { Container, Row, Col } from "react-bootstrap";
 import {
@@ -12,6 +13,7 @@ import {
   useSubscribeJumlahTransaksi,
   useSubscribePengeluaran,
   useSubscribePemasukan,
+  useSubscribeDataProduct,
 } from "../../hooks";
 import { useEffect } from "react";
 
@@ -23,7 +25,7 @@ const Dashboard = () => {
     loading: lTs,
     error: errTs,
   } = useSubscribeJumlahTransaksi();
-  const { data: jPl, loading: lPl, error: errPl } = useSubscribePengeluaran();
+  const { data: jPl, loading: lPl, error: errPl } = useSubscribeDataProduct();
   const { data: jPm, loading: lPm, error: errPm } = useSubscribePemasukan();
 
   const [a, sa] = useState();
@@ -34,19 +36,23 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (jP || jS || jTs || jPl || jPm) {
-      sa(jP?.test_Produk_aggregate || []);
-      sb(jS?.test_Produk_aggregate || []);
-      sc(jTs?.test_Transaksi_aggregate || []);
-      sd(jPl?.test_Produk_aggregate || []);
-      se(jPm?.test_Transaksi_aggregate || []);
+      sa(jP?.dikasir_Produk_aggregate || []);
+      sb(jS?.dikasir_Produk_aggregate || []);
+      sc(jTs?.dikasir_Transaksi_aggregate || []);
+      sd(jPl?.dikasir_Produk || []);
+      se(jPm?.dikasir_Transaksi_aggregate || []);
     }
   }, [jP, jS, jTs, jPl, jPm]);
 
-  const p = a?.aggregate?.count || "";
-  const q = b?.aggregate?.sum?.stok || "";
-  const r = c?.aggregate?.count || "";
-  const s = d?.aggregate?.sum?.harga || "";
-  const t = e?.aggregate?.sum?.total || "";
+  const jumlahProduk = a?.aggregate?.count || "0";
+  const jumlahSemuaStok = b?.aggregate?.sum?.stok || "0";
+  const jumlahTransaksi = c?.aggregate?.count || "0";
+  const jumlahPembayaran = e?.aggregate?.sum?.total || "";
+  let totalHargaSemuaProduk = 0;
+  totalHargaSemuaProduk = d?.reduce((total, aliasListItem) => {
+    return total + aliasListItem.harga * aliasListItem.stok;
+  }, 0);
+
   // console.log(p);
   // console.log(q);
   // console.log(r);
@@ -58,7 +64,7 @@ const Dashboard = () => {
   if (lP || lS || lTs || lPl || lPm) {
     return <LoadingComponent />;
   } else if (errP || errPl || errPm || errS || errTs) {
-    return <p>Errorr ....</p>;
+    return <ErrorComponent />;
   } else if (jP || jS || jTs || jPl || jPm) {
     return (
       <>
@@ -69,7 +75,13 @@ const Dashboard = () => {
               <SidebarComponent />
             </Col>
             <Col md={9}>
-              <DashboardComponent jP={p} jS={q} jTs={r} jPl={s} jPm={t} />
+              <DashboardComponent
+                jP={jumlahProduk}
+                jS={jumlahSemuaStok}
+                jTs={jumlahTransaksi}
+                jPl={totalHargaSemuaProduk}
+                jPm={jumlahPembayaran}
+              />
             </Col>
           </Row>
         </Container>

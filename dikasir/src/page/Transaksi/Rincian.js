@@ -20,7 +20,7 @@ const Index = () => {
   // set data ke state
   useEffect(() => {
     if (data) {
-      setRincian(data?.test_Transaksi || []);
+      setRincian(data?.dikasir_Transaksi || []);
     }
   }, [data]);
 

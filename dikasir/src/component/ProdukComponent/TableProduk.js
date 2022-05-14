@@ -9,6 +9,7 @@ import { filterProduct } from "../../utils/index";
 import { searchIcon } from "../../assets";
 import swal from "sweetalert";
 import { ErrorComponent, LoadingComponent, NoDataComponent } from "..";
+
 const TableProduk = ({ data, loading, error }) => {
   const { deleteProduk } = useDeleteDataProduct();
 

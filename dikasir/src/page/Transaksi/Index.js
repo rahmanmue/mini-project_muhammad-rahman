@@ -14,7 +14,7 @@ const Index = () => {
 
   useEffect(() => {
     if (data) {
-      setTransaksi(data.test_Transaksi);
+      setTransaksi(data.dikasir_Transaksi);
     }
   }, [data]);
 

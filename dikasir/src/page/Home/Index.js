@@ -34,7 +34,7 @@ const Index = () => {
   // setProduct dari data graphql
   useEffect(() => {
     if (data) {
-      setProduct(data?.test_Produk || []);
+      setProduct(data?.dikasir_Produk || []);
     }
   }, [data]);
 

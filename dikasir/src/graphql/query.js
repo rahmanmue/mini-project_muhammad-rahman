@@ -2,7 +2,7 @@ import { gql } from "@apollo/client";
 
 const getDataProduk = gql`
   query MyQuery {
-    test_Produk {
+    dikasir_Produk {
       id
       namaProduk
       stok
@@ -14,7 +14,7 @@ const getDataProduk = gql`
 
 const getDataProdukById = gql`
   query MyQuery($id: Int!) {
-    test_Produk_by_pk(id: $id) {
+    dikasir_Produk_by_pk(id: $id) {
       id
       harga
       gambar
@@ -26,7 +26,7 @@ const getDataProdukById = gql`
 
 const getDataNota = gql`
   query MyQuery($_eq: uuid = "", $_eq2: uuid = "") {
-    test_Transaksi(where: { kodeNota: { _eq: $_eq } }) {
+    dikasir_Transaksi(where: { kodeNota: { _eq: $_eq } }) {
       bayar
       id
       kembali

@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Button, Row, Col, Alert } from "react-bootstrap";
+import { Button, Row, Col } from "react-bootstrap";
 import { storage } from "../../firebase/firebase";
 import { useParams } from "react-router-dom";
 import { useGetDataProductById } from "../../hooks";
@@ -22,7 +22,7 @@ const EditProduk = () => {
   // set data ke state
   useEffect(() => {
     if (data) {
-      setState(data?.test_Produk_by_pk || {});
+      setState(data?.dikasir_Produk_by_pk || {});
     }
   }, [data]);
 
@@ -189,7 +189,7 @@ const EditProduk = () => {
                   {info === "wait" ? (
                     <>
                       <span
-                        class="spinner-border spinner-border-sm"
+                        className="spinner-border spinner-border-sm"
                         role="status"
                         aria-hidden="true"
                       ></span>

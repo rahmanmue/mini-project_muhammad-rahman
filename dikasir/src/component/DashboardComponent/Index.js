@@ -40,10 +40,21 @@ const Index = ({ jP, jPl, jPm, jS, jTs }) => {
             </div>
           </div>
         </Col>
-        <Col md={6} className="mt-3">
-          <div className="box bg-danger-3 d-flex flex-column">
+        <Col md={4} className="mt-3">
+          <div className="box bg-success-2 d-flex flex-column">
             <div className="sub-title ms-auto text-white">
               Total Pengeluaran
+            </div>
+            <div className="underline bg-white ms-auto w-25 my-1"></div>
+            <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
+              <div className="rupiah text-white">{toRupiah(jPl + jPm)}</div>
+            </div>
+          </div>
+        </Col>
+        <Col md={4} className="mt-3">
+          <div className="box bg-danger-3 d-flex flex-column">
+            <div className="sub-title ms-auto text-white">
+              Jumlah Harga Produk
             </div>
             <div className="underline bg-white ms-auto w-25 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
@@ -51,9 +62,11 @@ const Index = ({ jP, jPl, jPm, jS, jTs }) => {
             </div>
           </div>
         </Col>
-        <Col md={6} className="mt-3">
+        <Col md={4} className="my-3">
           <div className="box bg-success-2 d-flex flex-column">
-            <div className="sub-title ms-auto text-white">Total Pemasukan</div>
+            <div className="sub-title ms-auto text-white">
+              Jumlah Pembayaran
+            </div>
             <div className="underline bg-white ms-auto w-25 my-1"></div>
             <div className="d-flex align-items-center justify-content-center gap-5 mt-3">
               <div className="rupiah text-white">{toRupiah(jPm)}</div>

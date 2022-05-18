@@ -16,7 +16,7 @@ const Index = () => {
     <>
       <Col
         md={4}
-        style={{ marginBottom: "170px", minHeight: "100vh" }}
+        style={{ marginBottom: "200px", minHeight: "100vh" }}
         className="shadow-left px-3 pt-2"
       >
         <InfoComponent />

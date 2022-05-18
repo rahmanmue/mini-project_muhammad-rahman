@@ -54,9 +54,9 @@ const Index = () => {
   // konfirmasi produk
   const handleClickConfirmProduct = async () => {
     if (kembali < 0) {
-      return alert("Pembayaran Kurang !!!");
+      return swal("Gagal!", "Pembayaran Kurang!", "error");
     } else if (totalBayar === 0) {
-      return alert("Silahkan Pilih Barang Terlebih Dahulu");
+      return swal("Gagal!", "Silahkan Pilih Barang Terlebih Dahulu!", "error");
     } else {
       await addNewDataPayment();
       setBtnDisable(true);
@@ -79,7 +79,7 @@ const Index = () => {
       },
     });
 
-    console.log(listPayment);
+    // console.log(listPayment);
     insertTransaksi({
       variables: {
         object: listPayment[0],
@@ -143,9 +143,24 @@ const Index = () => {
           >
             KONFIRMASI PRODUK
           </Button>
+
           <Button
-            className={`my-1  ${
-              !btnDisable ? `btn btn-outline-primary ` : `bg-primary`
+            className={`my-1 btn ${
+              !btnDisable
+                ? `btn-outline-danger`
+                : `bg-danger-2 border-0 text-white`
+            }`}
+            disabled={!btnDisable}
+            onClick={resetData}
+          >
+            CANCEL PEMBAYARAN
+          </Button>
+          <Button
+            variant="outline-primary"
+            className={`btn ${
+              !btnDisable
+                ? `btn-outline-primary`
+                : `bg-primary border-0 text-white`
             }`}
             onClick={handleClickConfirmPayment}
             disabled={!btnDisable}
